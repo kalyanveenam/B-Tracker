@@ -1,0 +1,28 @@
+.jumbotron {
+  position: relative;
+  overflow: hidden;
+}
+
+.jumbotron .container {
+  position: relative;
+  z-index: 2;
+
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.jumbotron-background {
+  object-fit: cover;
+  font-family: "object-fit: cover;";
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+.sub-title {
+  color: rgb(221, 221, 221);
+  text-transform: uppercase;
+}
