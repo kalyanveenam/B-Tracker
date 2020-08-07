@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '../app/user/home/home.component';
 import { SigninComponent } from '../app/user/signin/signin.component';
@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'createTracker', component: CreateTrackerComponent },
-  { path: 'adminDashboard', component: AdminDashboardComponent }
+  { path: 'adminDashboard', component: AdminDashboardComponent },
+  { path: '', component: HomeComponent },
 ];
 
 @NgModule({
