@@ -1,1 +1,70 @@
-<p>dashboard works!</p>
+
+<div class="dashboard"></div>
+  <div class="input-group mb-3 w-75 mt-5 pl-1 pr-1">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search with any Keyword"
+      aria-label="Recipient's username"
+      aria-describedby="basic-addon2"
+    />
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+  </div>
+
+
+<div class="btn-group mt-2 mb-3  " role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary pl-3">Assigned to me</button>
+  <button type="button" class="btn btn-secondary pl-3">Reported by me</button>
+  <button type="button" class="btn btn-secondary pl-3">Starred issues</button>
+  <button type="button" class="btn btn-secondary pl-5">Create</button>
+</div>
+
+
+
+<div class="table-responsive table table-striped">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Description</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Assignee</th>
+        <th scope="col">Reporter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">8-8-2020</th>
+        <td><a href="">Home page UX is improper, please set new home page</a> </td>
+        <td>p1</td>
+        <td>kalyan</td>
+        <td>karthik</td>
+      </tr>
+      <tr>
+        <th scope="row">8-8-2020</th>
+        <td><a href="">Concur Connector - Require changes in React as per the description</a> </td>
+        <td>p2</td>
+        <td>munni</td>
+        <td>karthik</td>
+      </tr>
+      <tr>
+        <th scope="row">8-8-2020</th>
+        <td><a href="">Gorgias API Assistant : To add Left-out endpoints as per the description</a></td>
+        <td>p2</td>
+        <td>munni</td>
+        <td>karthik</td>
+      </tr>
+      <tr>
+        <th scope="row">8-8-2020</th>
+        <td><a href="">[Slack connector] Add support for "Blocks" and "Attachments"</a></td>
+        <td>p2</td>
+        <td>munni</td>
+        <td>karthik</td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
+<app-footer></app-footer>

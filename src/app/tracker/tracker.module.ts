@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CreatetrackerComponent } from './createtracker/createtracker.component';
-import { ViewtrackerComponent } from './viewtracker/viewtracker.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { CreateTrackerComponent } from './create-tracker/create-tracker.component';
-import { ViewTrckerComponent } from './view-trcker/view-trcker.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+
 import { ViewTrackerComponent } from './view-tracker/view-tracker.component';
-
-
-
+import { SharedModule } from '../shared/shared.module';
 @NgModule({
-  declarations: [DashboardComponent, CreatetrackerComponent, ViewtrackerComponent, AdminDashboardComponent, CreateTrackerComponent, ViewTrckerComponent, ViewTrackerComponent],
-  imports: [
-    CommonModule
-  ]
+  declarations: [
+    DashboardComponent,
+    AdminDashboardComponent,
+    CreateTrackerComponent,
+    ViewTrackerComponent,
+  ],
+  imports: [CommonModule, SharedModule],
 })
-export class TrackerModule { }
+export class TrackerModule {}
