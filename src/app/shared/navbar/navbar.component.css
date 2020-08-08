@@ -1,0 +1,11 @@
+.container {
+margin-left: 0;
+margin-right: 0;
+width: 100vw;
+  padding: 0%;
+}
+.navbuttons{
+    margin-left: 0px;
+    float: right;
+    right:0
+}
