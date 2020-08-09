@@ -34,10 +34,10 @@
           placeholder="Create password"
         />
    
-        <input type="submit" class="fadeIn fourth" value="Signup" />
+        <input type="submit" class="fadeIn fourth" value="Signup" [routerLink]="['/signin']" />
       </form>
     
      
     </div>
   </div>
-  
+  <router-outlet></router-outlet>

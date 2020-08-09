@@ -6,6 +6,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 
 import { ViewTrackerComponent } from './view-tracker/view-tracker.component';
 import { SharedModule } from '../shared/shared.module';
+import { AppRoutingModule } from '../app-routing.module';
+import { from } from 'rxjs';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -13,6 +15,6 @@ import { SharedModule } from '../shared/shared.module';
     CreateTrackerComponent,
     ViewTrackerComponent,
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule,AppRoutingModule],
 })
 export class TrackerModule {}

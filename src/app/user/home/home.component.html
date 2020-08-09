@@ -13,11 +13,8 @@
       organize, and prioritize your bugs. Click on sign in to continue
     </p>
     <hr class="my-4" />
-    <p>
-      It uses utility classes for typography and spacing to space content out
-      within the larger container.
-    </p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+   
+    <a class="btn btn-primary btn-lg" [routerLink]="['/signup']" role="button">Signup</a>
   </div>
 </div>
 
@@ -27,3 +24,4 @@
 <app-card name="Change status" image="../../assets/viewTracker.png"  description="You can change the status of the bug any time"></app-card>
 </div>
 <app-footer></app-footer>
+<router-outlet></router-outlet>

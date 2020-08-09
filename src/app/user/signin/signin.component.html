@@ -10,23 +10,31 @@
         id="login"
         class="fadeIn second"
         name="login"
-        placeholder="Enter email ID"
+        placeholder="Enter Email ID"
       />
       <input
         type="text"
         id="password"
         class="fadeIn third"
         name="login"
-        placeholder="Enter password"
+        placeholder="Enter Password"
       />
-      <input type="submit" class="fadeIn fourth" value="Log In" />
+      <input
+        type="submit"
+        class="fadeIn fourth"
+        [routerLink]="['/dashboard']"
+        value="Log In"
+      />
     </form>
     <div id="formFooter">
-        <a class="underlineHover" [routerLink]="['/packages']">click here to <b class='signup'>Signup</b></a>
-      </div>
+      <a class="underlineHover" [routerLink]="['/signup']"
+        >click here to <b class="signup">Signup</b></a
+      >
+    </div>
 
     <div id="formFooter">
       <a class="underlineHover" href="#">Forgot Password?</a>
     </div>
   </div>
 </div>
+<router-outlet></router-outlet>
