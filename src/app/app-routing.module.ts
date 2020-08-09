@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'createTracker', component: CreateTrackerComponent },
   { path: 'adminDashboard', component: AdminDashboardComponent },
+  {path:'viewTracker',component:ViewTrackerComponent},
   { path: '', component: HomeComponent },
 ];
 

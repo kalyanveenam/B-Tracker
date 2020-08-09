@@ -1,0 +1,72 @@
+.create-bug {
+  background-color: #d6e4ed;
+
+  margin-left: 20vw;
+  margin-right: 20vw;
+  border: 1px solid #aaaaaa;
+}
+.center_div {
+  margin: 0 auto;
+  width: 50%;
+}
+.select-btn {
+  padding-top: 2vh;
+  width: 8%;
+  margin-left: 4vw;
+}
+.title {
+  padding-top: 2vh;
+}
+.title-input {
+  padding-top: 2vh;
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+.attachment {
+  padding-right: 4vw;
+  padding-left: 4vw;
+  width: 30vw;
+}
+.assignee-name {
+  padding-left: 4vw;
+  width: 20vw;
+  margin-bottom: 2vh;
+}
+.submit {
+  margin-top: 2vh;
+  margin-left: 45vw;
+
+  width: 10vw;
+}
+.coll {
+  background-color: #343a40;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  color: rgb(238, 238, 238) !important;
+}
+.general-sec {
+  color: #d6e4ed;
+}
+.advanced-input {
+  color: #343a40;
+}
+.btn-color {
+  background-color: transparent !important;
+}
+button-grp {
+  margin-top: 40px;
+}
+.mr {
+ 
+  margin-left: 40vw;
+}
+
+
+
+
+
+
+
+
+
+

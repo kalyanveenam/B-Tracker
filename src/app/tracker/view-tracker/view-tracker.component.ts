@@ -8,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class ViewTrackerComponent implements OnInit {
 
   constructor() { }
-
+  buttonDisabled: Boolean = true;
+  changeStatus() { 
+    this.buttonDisabled = false;
+  }
   ngOnInit(): void {
+   
   }
 
 }
