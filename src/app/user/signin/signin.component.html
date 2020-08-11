@@ -4,25 +4,28 @@
       <img src="../../../assets/login-icon.png" id="icon" alt="User Icon" />
     </div>
 
-    <form>
+    <form   
+    #loginForm="ngForm"
+    (ngSubmit)="onSubmit(loginForm.value)">
       <input
         type="text"
         id="login"
+        ngModel
         class="fadeIn second"
-        name="login"
+        name="email"
         placeholder="Enter Email ID"
       />
       <input
         type="text"
         id="password"
         class="fadeIn third"
-        name="login"
+        name="password"
+        ngModel
         placeholder="Enter Password"
       />
       <input
         type="submit"
         class="fadeIn fourth"
-        [routerLink]="['/dashboard']"
         value="Log In"
       />
     </form>
