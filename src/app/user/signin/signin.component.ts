@@ -1,20 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../../http-service.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent implements OnInit {
-  constructor(public HttpService: HttpServiceService, public router: Router) {}
+  constructor(
+    public HttpService: HttpServiceService,
+    public router: Router,
+    public toastr: ToastrService
+  ) {}
   onSubmit = (value) => {
-    console.log('email ' + JSON.stringify(value) + " FN " + value.email);
     this.HttpService.signin(value.email, value.password).subscribe(
       (response) => {
-        if (response) {
+        console.log('test', JSON.stringify(response));
+        if ((response['status'] = '200')) {
+          this.toastr.success('Signin sucessfull', 'Taking you to Dashboard');
+
           this.router.navigate(['dashboard']);
         }
+      },
+      (error) => { 
+        this.toastr.error('email or password is incorrect ');
       }
     );
   };

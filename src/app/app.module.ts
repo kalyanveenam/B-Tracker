@@ -1,17 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpServiceService} from './http-service.service';
+import { HttpServiceService } from './http-service.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
 import { TrackerModule } from './tracker/tracker.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule  } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
+
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,9 +22,12 @@ import { HttpClientModule  } from '@angular/common/http';
     TrackerModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({ positionClass: 'toast-top-right' }),
+    ToastContainerModule,
   ],
   providers: [HttpServiceService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

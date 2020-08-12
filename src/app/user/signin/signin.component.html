@@ -4,9 +4,7 @@
       <img src="../../../assets/login-icon.png" id="icon" alt="User Icon" />
     </div>
 
-    <form   
-    #loginForm="ngForm"
-    (ngSubmit)="onSubmit(loginForm.value)">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
       <input
         type="text"
         id="login"
@@ -14,6 +12,7 @@
         class="fadeIn second"
         name="email"
         placeholder="Enter Email ID"
+        ng-required
       />
       <input
         type="text"
@@ -22,12 +21,9 @@
         name="password"
         ngModel
         placeholder="Enter Password"
+        ng-required
       />
-      <input
-        type="submit"
-        class="fadeIn fourth"
-        value="Log In"
-      />
+      <input type="submit" class="fadeIn fourth" value="Log In" />
     </form>
     <div id="formFooter">
       <a class="underlineHover" [routerLink]="['/signup']"
