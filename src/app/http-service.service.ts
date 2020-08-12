@@ -16,4 +16,16 @@ export class HttpServiceService {
       { headers: { 'Content-Type': 'application/json' } }
     );
   }
+  public signup(name, email, password, phoneno) {
+   return this._http.post(
+      this.baseUrl + '/user/signup',
+      JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+        phoneNo: phoneno,
+      }),
+      { headers: { 'Content-Type': 'application/json' } }
+    );
+  }
 }

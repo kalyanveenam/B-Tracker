@@ -1,43 +1,45 @@
 <div class="wrapper fadeInDown">
-    <div id="formContent">
-      <div class="fadeIn first">
-        <img src="../../../assets/signup.png" id="icon" alt="User Icon" />
-      </div>
-  
-      <form>
-        <input
-          type="text"
-          id="login"
-          class="fadeIn second"
-          name="login"
-          placeholder=" email Address"
-        />
-        <input
+  <div id="formContent">
+    <div class="fadeIn first">
+      <img src="../../../assets/signup.png" id="icon" alt="User Icon" />
+    </div>
+
+    <form #signupvalues="ngForm" (ngSubmit)="onSubmit(signupvalues.value)">
+      <input
+        type="text"
+        id="login"
+        class="fadeIn second"
+        name="email"
+        placeholder=" email Address"
+        ngModel
+      />
+      <input
         type="text"
         id="password"
         class="fadeIn third"
-        name="login"
+        name="name"
         placeholder=" Full name"
+        ngModel
       />
       <input
-      type="text"
-      id="password"
-      class="fadeIn third"
-      name="login"
-      placeholder="Mobile number"
-    />
-        <input
-          type="text"
-          id="password"
-          class="fadeIn third"
-          name="login"
-          placeholder="Create password"
-        />
-   
-        <input type="submit" class="fadeIn fourth" value="Signup" [routerLink]="['/signin']" />
-      </form>
-    
-     
-    </div>
+        type="text"
+        id="password"
+        class="fadeIn third"
+        name="phoneno"
+        placeholder="Mobile number"
+        ngModel
+      />
+      <input
+        type="text"
+        id="password"
+        class="fadeIn third"
+        name="password"
+        placeholder="Create password"
+        ngModel
+      />
+
+      <input type="submit" class="fadeIn fourth" value="Signup" />
+    </form>
   </div>
-  <router-outlet></router-outlet>
+</div>
+<router-outlet></router-outlet>
