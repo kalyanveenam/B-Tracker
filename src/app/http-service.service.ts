@@ -13,13 +13,11 @@ export class HttpServiceService {
   }
 
   public signin(username, password) {
-    return this._http
-      .post(
-        this.baseUrl + '/user/login',
-        JSON.stringify({ email: username, password: password }),
-        { headers: { 'Content-Type': 'application/json' } }
-      )
-     
+    return this._http.post(
+      this.baseUrl + '/user/login',
+      JSON.stringify({ email: username, password: password }),
+      { headers: { 'Content-Type': 'application/json' } }
+    );
   }
   public signup(name, email, password, phoneno) {
     return this._http.post(
@@ -33,5 +31,27 @@ export class HttpServiceService {
       { headers: { 'Content-Type': 'application/json' } }
     );
   }
- 
+
+  public getTrackers() {
+    console.log(localStorage.getItem('token'));
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    return this._http.get(this.baseUrl + '/bugs', {headers: header });
+  }
+  public createTracker(title, description, priority, Attachment, assignee) {
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    header['Content-Type'] = 'application/json';
+    return this._http.post(
+      this.baseUrl + '/create/bug',
+      JSON.stringify({
+        title: title,
+        description: description,
+        priority: priority,
+        Attachment: Attachment,
+        assignee: assignee,
+      }),
+      header
+    );
+  }
 }

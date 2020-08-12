@@ -19,8 +19,10 @@ export class SigninComponent implements OnInit {
         console.log('test', JSON.stringify(response));
         if ((response['status'] = '200')) {
           this.toastr.success('Signin sucessfull', 'Taking you to Dashboard');
-
+          console.log(response);
           this.router.navigate(['dashboard']);
+          localStorage.setItem('token', response['data']['token']['token']);
+          localStorage.setItem('userDetails', response['data']['userDetails']);
         }
       },
       (error) => { 

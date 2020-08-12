@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-create-tracker',
   templateUrl: './create-tracker.component.html',
-  styleUrls: ['./create-tracker.component.css']
+  styleUrls: ['./create-tracker.component.css'],
 })
 export class CreateTrackerComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  public onSubmit(data) {
+    console.log(data);
   }
-
 }

@@ -1,5 +1,5 @@
 <div class="searchandbuttons">
-<div class="dashboard"></div>
+  <div class="dashboard"></div>
   <div class="input-group mb-3 w-75 mt-5 pl-1 pr-1 divchild">
     <input
       type="text"
@@ -13,14 +13,41 @@
     </div>
   </div>
 
-
-<div class="btn-group mt-2 mb-0 btngroup divchild" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary btn-color pl-3" style="color:black;">Assigned to me</button>
-  <button type="button" class="btn btn-secondary btn-color pl-3" style="color:black;">Reported by me</button>
-  <button type="button" class="btn btn-secondary btn-color pl-3" style="color:black;">Starred issues</button>
-  <button type="button" class="btn btn-secondary btn-color pl-3" style="color:black;" [routerLink]="['/createTracker']">Create</button>
-</div>
-
+  <div
+    class="btn-group mt-2 mb-0 btngroup divchild"
+    role="group"
+    aria-label="Basic example"
+  >
+    <button
+      type="button"
+      class="btn btn-secondary btn-color pl-3"
+      style="color: black;"
+    >
+      Assigned to me
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary btn-color pl-3"
+      style="color: black;"
+    >
+      Reported by me
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary btn-color pl-3"
+      style="color: black;"
+    >
+      Starred issues
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary btn-color pl-3"
+      style="color: black;"
+      [routerLink]="['/createTracker']"
+    >
+      Create
+    </button>
+  </div>
 </div>
 
 <div class="table-responsive table table-striped table">
@@ -34,37 +61,22 @@
         <th scope="col">Reporter</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <th scope="row">8-8-2020</th>
-        <td><a [routerLink]="['/viewTracker']">Home page UX is improper, please set new home page</a> </td>
-        <td>p1</td>
-        <td>kalyan</td>
-        <td>karthik</td>
-      </tr>
-      <tr>
-        <th scope="row">8-8-2020</th>
-        <td><a href="">Concur Connector - Require changes in React as per the description</a> </td>
-        <td>p2</td>
-        <td>munni</td>
-        <td>karthik</td>
-      </tr>
-      <tr>
-        <th scope="row">8-8-2020</th>
-        <td><a href="">Gorgias API Assistant : To add Left-out endpoints as per the description</a></td>
-        <td>p2</td>
-        <td>munni</td>
-        <td>karthik</td>
-      </tr>
-      <tr>
-        <th scope="row">8-8-2020</th>
-        <td><a href="">[Slack connector] Add support for "Blocks" and "Attachments"</a></td>
-        <td>p2</td>
-        <td>munni</td>
-        <td>karthik</td>
-      </tr>
-     
-    </tbody>
+   
+      <tbody>
+   
+        <tr *ngFor="let bug of trackers">
+          <th scope="row">8-8-2020</th>
+          <td>
+            <a [routerLink]="['/viewTracker']"
+              >Home page UX is improper, please set new home page</a
+            >
+          </td>
+          <td>p1</td>
+          <td>kalyan</td>
+          <td>karthik</td>
+        </tr>
+      </tbody>
+
   </table>
 </div>
 <app-footer></app-footer>
