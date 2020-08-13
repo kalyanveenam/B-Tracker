@@ -53,3 +53,13 @@
 .advanced-input{
   color: #343a40;
 }
+.btn-color {
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  margin-left: 40vw;
+  margin-right: 40vw;
+  background-color: transparent !important;
+}
+.btn-color:hover{
+  background-color: rgb(53, 53, 187);
+}

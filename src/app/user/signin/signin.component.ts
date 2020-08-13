@@ -22,10 +22,10 @@ export class SigninComponent implements OnInit {
           console.log(response);
           this.router.navigate(['dashboard']);
           localStorage.setItem('token', response['data']['token']['token']);
-          localStorage.setItem('userDetails', response['data']['userDetails']);
+          localStorage.setItem('username', response['data']['userDetails']['name']);
         }
       },
-      (error) => { 
+      (error) => {
         this.toastr.error('email or password is incorrect ');
       }
     );

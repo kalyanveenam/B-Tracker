@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit {
         this.trackers = response;
         console.log(this.trackers);
         this.toastr.success(
-          'Listing blogs reported by' +
-            localStorage.getItem('userDetails')['name']
+          'Listing blogs reported by ' +
+            localStorage.getItem('username')
         );
       }
     });

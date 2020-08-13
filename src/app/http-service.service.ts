@@ -38,7 +38,7 @@ export class HttpServiceService {
     header['Authorization'] = localStorage.getItem('token');
     return this._http.get(this.baseUrl + '/bugs', {headers: header });
   }
-  public createTracker(title, description, priority, Attachment, assignee) {
+  public createTracker(title, description, priority, assignee) {
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
     header['Content-Type'] = 'application/json';
@@ -48,10 +48,10 @@ export class HttpServiceService {
         title: title,
         description: description,
         priority: priority,
-        Attachment: Attachment,
+        Attachment: "support soon",
         assignee: assignee,
       }),
-      header
+      { headers: header }
     );
   }
 }
