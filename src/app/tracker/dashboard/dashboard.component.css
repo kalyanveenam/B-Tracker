@@ -2,3 +2,9 @@
   background-color: transparent !important;
 }
 
+.searchandbuttons{
+  margin-top: 15vh;
+}
+.link-view:hover{
+color: rgb(2, 2, 112);
+}

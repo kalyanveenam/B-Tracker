@@ -54,4 +54,25 @@ export class HttpServiceService {
       { headers: header }
     );
   }
+
+  public getTrackerById(id) {
+    console.log(localStorage.getItem('token'));
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    console.log(this.baseUrl + '/bugs/' + id);
+    return this._http.get(this.baseUrl + '/bugs/'+id, {headers: header });
+  }
+  public updateTrcker(id,data) { 
+      var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    header['Content-Type'] = 'application/json';
+    return this._http.post(
+      this.baseUrl + '/bugs/update/'+id,
+      JSON.stringify({
+       data
+      }),
+      { headers: header }
+    );
+  }
+
 }

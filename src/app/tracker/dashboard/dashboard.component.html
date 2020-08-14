@@ -54,29 +54,27 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Date</th>
+        <th scope="col">Title</th>
         <th scope="col">Description</th>
+        <th scope="col">Status</th>
         <th scope="col">Priority</th>
         <th scope="col">Assignee</th>
-        <th scope="col">Reporter</th>
+        <th scope="col">Created Date</th>
       </tr>
     </thead>
-   
-      <tbody>
-   
-        <tr *ngFor="let bug of trackers">
-          <th scope="row">8-8-2020</th>
-          <td>
-            <a [routerLink]="['/viewTracker']"
-              >{{bug.description}}</a
-            >
-          </td>
-          <td>{{bug.priority}}</td>
-          <td>kalyan</td>
-          <td>{{bug.assignee}}</td>
-        </tr>
-      </tbody>
 
+    <tbody>
+      <tr *ngFor="let bug of trackers">
+        <td scope="row">{{ bug.title }}</td>
+        <td>
+          <a  class="link-view" (click)="sendId(bug._id)">{{ bug.description }}</a>
+        </td>
+        <td>{{ bug.status }}</td>
+        <td>{{ bug.priority }}</td>
+        <td>{{ bug.assignee }}</td>
+        <td>{{ bug.createdDate }}</td>
+      </tr>
+    </tbody>
   </table>
 </div>
 <app-footer></app-footer>

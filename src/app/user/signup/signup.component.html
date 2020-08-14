@@ -1,10 +1,10 @@
-<div class="wrapper fadeInDown">
+<div class="wrapper fadeInDown signp-form">
   <div id="formContent">
     <div class="fadeIn first">
       <img src="../../../assets/signup.png" id="icon" alt="User Icon" />
     </div>
 
-    <form #signupvalues="ngForm" (ngSubmit)="onSubmit(signupvalues.value)">
+    <form #signupvalues="ngForm" (ngSubmit)="onSubmit(signupvalues.value)" >
       <input
         type="text"
         id="login"
@@ -33,7 +33,7 @@
         ng-required
       />
       <input
-        type="text"
+        type="password"
         id="password"
         class="fadeIn third"
         name="password"
@@ -44,6 +44,11 @@
 
       <input type="submit" class="fadeIn fourth" value="Signup" />
     </form>
+    <div id="formFooter">
+      <a class="underlineHover" [routerLink]="['/signin']"
+        >Already have an account?   <b class="signup"> Login</b></a
+      >
+    </div>
   </div>
 </div>
 <router-outlet></router-outlet>

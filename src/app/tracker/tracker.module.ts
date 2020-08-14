@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ViewTrackerComponent } from './view-tracker/view-tracker.component';
 import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { ActivatedRoute } from '@angular/router'
 @NgModule({
   declarations: [
     DashboardComponent,

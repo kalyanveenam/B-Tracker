@@ -25,13 +25,19 @@ export class SignupComponent implements OnInit {
       )
       .subscribe(
         (response) => {
-          console.log(response);
-          this.toastr.success(
-            'Signup Sucessful!',
-            'Navigating to signin page'
-          );
-          this.router.navigate(['signin']);
-          
+          if (response['message']['errors']) {
+            this.toastr.error(
+              'Missing mandatory fields! Please try again'
+            );
+          }
+          else {
+            console.log(response);
+            this.toastr.success(
+              'Signup Sucessful!',
+              'Navigating to signin page'
+            );
+            this.router.navigate(['signin']);
+          }
         },
         (error) => {
           console.log(error);
