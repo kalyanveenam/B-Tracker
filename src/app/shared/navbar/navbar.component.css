@@ -1,20 +1,19 @@
 .container {
-margin-left: 0;
-margin-right: 0;
-width: 100vw;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100vw;
   padding: 0%;
-
 }
 
-.navbuttons{
-    margin-left: 0px;
-    float: right;
-    right:0
+.navbuttons {
+  margin-left: 0px;
+  float: right;
+  right: 0;
 }
 
-.sticktotop{
+.sticktotop {
   position: fixed;
-z-index: 1000;
-width: 100%;
-top: 0px;
+  z-index: 5000;
+  width: 100%;
+  top: 0px;
 }
