@@ -62,17 +62,21 @@ export class HttpServiceService {
     console.log(this.baseUrl + '/bugs/' + id);
     return this._http.get(this.baseUrl + '/bugs/'+id, {headers: header });
   }
-  public updateTrcker(id,data) { 
+  public updateTracker(id,data) { 
       var header = {};
     header['Authorization'] = localStorage.getItem('token');
     header['Content-Type'] = 'application/json';
     return this._http.post(
       this.baseUrl + '/bugs/update/'+id,
-      JSON.stringify({
-       data
-      }),
+      data,
       { headers: header }
     );
+  }
+  public getAllUsers() {
+       var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+   
+    return this._http.get(this.baseUrl + '/users/all/', {headers: header });
   }
 
 }

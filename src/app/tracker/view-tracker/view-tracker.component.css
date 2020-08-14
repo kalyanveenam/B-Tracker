@@ -63,21 +63,28 @@ button-grp {
 .btn-view{
   margin-top: 15vh !important;
 }
+.assignee-desk{
+  margin-right: 40vw;
+  padding-top: 2vh;
+  margin-left: 4vw;
+  margin-bottom: 3vh;
+ 
+}
 
 @media(min-width:0px) and (max-width:760px) {
 
   .btn-view{
     margin-top: 15vh !important;
     margin-right: 15vw;
-   width: 100%;
+    width: 100%;
   }
   .mr {
  
     margin-left: 15vw;
   }
   .create-bug {
-    background-color: #d6e4ed;
-  
+    background-color: #ffffff;
+  color:#000000 !important;
     margin-left: 2vw;
     margin-right: 2vw;
     border: 1px solid #aaaaaa;
@@ -86,11 +93,30 @@ button-grp {
     background-color: #343a40;
     margin-left: 2vw;
     margin-right: 2vw;
-    color: rgb(238, 238, 238) !important;
+    color: #000000 !important;
   }
-  .priority-mob{
-    padding-left: 30vw !important;
-  }
+
+ .test{
+   color: black;
+ }
+.priority-mob{
+  height: 50px;
+  color:black;
+  padding-left: 10vw;
+margin-bottom: 2vh;
+
+
+}
+.advanced-input {
+  color: #343a40;
+padding-right: 6vw;
+padding-left: 6vw
+}
+.attachment {
+  padding-right: 2vw;
+  padding-left: 2vw;
+  width: 60vw;
+}
 }
 
 

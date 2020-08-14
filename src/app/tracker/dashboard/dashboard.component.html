@@ -65,9 +65,11 @@
 
     <tbody>
       <tr *ngFor="let bug of trackers">
-        <td scope="row">{{ bug.title }}</td>
+        <td scope="row">
+          <a  class="link-view" (click)="sendId(bug._id)"><u>
+          {{ bug.title }}</u></a></td>
         <td>
-          <a  class="link-view" (click)="sendId(bug._id)">{{ bug.description }}</a>
+          {{ bug.description }}
         </td>
         <td>{{ bug.status }}</td>
         <td>{{ bug.priority }}</td>

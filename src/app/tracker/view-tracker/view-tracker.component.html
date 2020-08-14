@@ -1,3 +1,4 @@
+<form #getFormData="ngForm" (ngSubmit)="updateBug(getFormData.value)">
 <div
   class="btn-group mt-2 mb-0 btngroup divchild btn-view"
   role="group"
@@ -13,10 +14,10 @@
       Edit
     </button>
     <button
-      type="button"
+      type="submit"
       class="btn btn-secondary btn-color pl-3"
       style="color: black;"
-      [routerLink]="['/dashboard']"
+    
     >
       Save and close
     </button>
@@ -29,140 +30,136 @@
     </button>
   </div>
 </div>
-<form #updatedValues="ngForm" (ngSubmit)="updateBug(updatedValues.value)">
-  <div id="accordion">
-    <div class="card">
-      <div class="card-header coll" id="headingOne">
-        <h5 class="mb-0">
-          <button
-            class="btn general-sec dropdown-toggle"
-            data-toggle="collapse"
-            data-target="#collapseOne"
-            aria-expanded="true"
-            aria-controls="collapseOne"
-          >
-            General
-          </button>
-        </h5>
-      </div>
-      <div
-        id="collapseOne"
-        class="collapse show"
-        aria-labelledby="headingOne"
-        data-parent="#accordion"
-      >
-        <div class="create-bug">
-          <div class="form-group title-input">
-            <label class="title" for="Title">Title</label>
-            <input
-              type="email"
-              class="form-control"
-              id="Title"
-              name="title"
-              
-              aria-describedby="emailHelp"
-              placeholder="Overview of bug"
-              [disabled]="buttonDisabled"
-              value="{{ this.bugData.title }}"
-            />
-
-            <div class="form-group">
-              <label for="comment">Description:</label>
-
-              <textarea
-                class="form-control"
-                rows="5"
-                id="comment"
-                name="description"
-                
-                placeholder="Add bug description here"
-                [disabled]="buttonDisabled"
-                value="{{ this.bugData.description }}"
-              ></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+<div id="accordion">
   <div class="card">
-    <div class="card-header coll" id="headingTwo">
+    <div class="card-header coll" id="headingOne">
       <h5 class="mb-0">
         <button
           class="btn general-sec dropdown-toggle"
           data-toggle="collapse"
-          data-target="#collapseTwo"
-          aria-expanded="false"
-          aria-controls="collapseTwo"
+          data-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
         >
-          Advanced
+          General
         </button>
       </h5>
     </div>
     <div
-      id="collapseTwo"
+      id="collapseOne"
       class="collapse show"
-      aria-labelledby="headingTwo"
+      aria-labelledby="headingOne"
       data-parent="#accordion"
     >
       <div class="create-bug">
-        <div class="advanced-input">
-          <div class="select-btn">
-            <label for="comment">Priority:</label>
-            <br />
-            <select
-              class="browser-default custom-select priority-mob"
-              [disabled]="buttonDisabled"
-            >
-              <option value="1">P1</option>
-              <option value="2">P2</option>
-              <option value="3">P3</option>
-            </select>
-            <br />
-          </div>
-          <div class="select-btn">
-            <label for="comment">Status</label>
-            <br />
-            <select
-              class="browser-default custom-select priority-mob"
-              [disabled]="buttonDisabled"
-            >
-              <option value="1">open</option>
-              <option value="2">reject</option>
-              <option value="3">fixed</option>
-              <option value="3">closed</option>
-            </select>
-            <br />
-          </div>
-          <div class="attachment">
-            <form>
-              <div class="form-group">
-                <label for="comment">Upload Attachment:</label>
-                <input
-                  type="file"
-                  class="form-control-file"
-                  id="exampleFormControlFile1"
-                  [disabled]="buttonDisabled"
-                />
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="assignee-name">
-          <label for="assignee"> Change Assignee</label>
+        <div class="form-group title-input">
+          <label class="title" for="Title">Title</label>
           <input
             type="email"
-            class="form-control priority-mob"
-            id="assignee"
+            class="form-control"
+            id="Title"
+            aria-describedby="emailHelp"
+            placeholder="Overview of bug"
+            name="title"
+            [(ngModel)]="this.bugData.title"
             [disabled]="buttonDisabled"
-            placeholder="Add Assignee here"
-            value="{{this.bugData.assignee}}"
-            name="assignee"
-            
           />
+
+          <div class="form-group">
+            <label for="comment">Description:</label>
+
+            <textarea
+              class="form-control"
+              rows="5"
+              id="comment"
+              placeholder="Add bug description here"
+              [disabled]="buttonDisabled"
+              name="description"
+              [(ngModel)]="this.bugData.description"
+            ></textarea>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="card">
+  <div class="card-header coll" id="headingTwo">
+    <h5 class="mb-0">
+      <button
+        class="btn general-sec dropdown-toggle"
+        data-toggle="collapse"
+        data-target="#collapseTwo"
+        aria-expanded="false"
+        aria-controls="collapseTwo"
+      >
+        Advanced
+      </button>
+    </h5>
+  </div>
+  <div
+    id="collapseTwo"
+    class="collapse show"
+    aria-labelledby="headingTwo"
+    data-parent="#accordion"
+  >
+    <div class="create-bug">
+      <div class="advanced-input">
+
+        <div class="attachment">
+       
+          <div class="form-group">
+            <br />
+            <label for="comment">Upload Attachment:</label>
+            <input
+              type="file"
+              class="form-control-file"
+              id="exampleFormControlFile1"
+              [disabled]="buttonDisabled"
+            />
+          </div>
+          <label for="comment">Priority:</label>
+          <br />
+
+        <select
+        class="browser-default custom-select priority-mob"
+        [disabled]="buttonDisabled"  name="priority" [(ngModel)]="this.bugData.priority"
+      >
+      <option *ngFor="let priority of priorities" [value]="priority.id">{{priority.id}}</option> 
+      </select>
+   
+          <label for="comment">Status</label>
+       
+          <select
+            class="browser-default custom-select priority-mob"
+            [disabled]="buttonDisabled"
+            name="status" 
+            [(ngModel)]="this.bugData.status"
+          >
+
+          <option *ngFor="let status of statusList" [value]="status.name">{{status.name}}</option> 
+ 
+          </select>
+          <label for="comment">Assignee</label>
+          <select
+          class="browser-default custom-select  priority-mob"
+          [disabled]="buttonDisabled"
+          name="assignee" 
+          [(ngModel)]="this.bugData.assignee"
+        >
+        <option *ngFor="let assignee of assignees" [value]="assignee.name">{{assignee.name}}</option> 
+
+        </select>
+
+         
+        </div>
+  
+      <br />
+      </div>
+     
+    </div>
+  </div>
+</div>
 </form>
+

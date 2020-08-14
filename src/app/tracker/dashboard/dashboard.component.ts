@@ -16,8 +16,7 @@ export class DashboardComponent implements OnInit {
   public getBugs() {
     this.Http.getTrackers().subscribe((response) => {
       console.log(response['data'])
-//console.log(  JSON.stringify(    response['data']['createdDate'].split(':')[0]))
-        
+     
       this.trackers = response['data'];
 
         console.log(this.trackers);
