@@ -25,7 +25,8 @@ export class SignupComponent implements OnInit {
       )
       .subscribe(
         (response) => {
-          if (response['message']['errors']) {
+          console.log(response)
+          if (response['error']==true) {
             this.toastr.error(
               'Missing mandatory fields! Please try again'
             );
