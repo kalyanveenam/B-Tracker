@@ -52,7 +52,7 @@
       data-parent="#accordion"
     >
       <div class="create-bug">
-        <div class="form-group title-input">
+        <div class="form-group title-input" >
           <label class="title" for="Title">Title</label>
           <input
             type="email"
@@ -63,6 +63,7 @@
             name="title"
             [(ngModel)]="this.bugData.title"
             [disabled]="buttonDisabled"
+           
           />
 
           <div class="form-group">

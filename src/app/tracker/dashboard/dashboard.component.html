@@ -22,15 +22,20 @@
       type="button"
       class="btn btn-secondary btn-color pl-3"
       style="color: black;"
+      data-toggle="tooltip"
+      data-html="true"
+      title="Click to sort with issues Assigned to you"
+      (click)="bugdReportedByUser()"
     >
-      Assigned to me
+      Reported by me
     </button>
     <button
       type="button"
       class="btn btn-secondary btn-color pl-3"
       style="color: black;"
+      (click)="getBugsByAssignee()"
     >
-      Reported by me
+      Assigned to me 
     </button>
     <button
       type="button"
@@ -58,7 +63,8 @@
         <th scope="col">Description</th>
         <th scope="col">Status</th>
         <th scope="col">Priority</th>
-        <th scope="col">Assignee</th>
+        <th scope="col" *ngIf="isAssignee">Assignee</th>
+       <th scope="col" *ngIf="isReporter">Reporter</th>
         <th scope="col">Created Date</th>
       </tr>
     </thead>
@@ -66,8 +72,10 @@
     <tbody>
       <tr *ngFor="let bug of trackers">
         <td scope="row">
-          <a  class="link-view" (click)="sendId(bug._id)"><u>
-          {{ bug.title }}</u></a></td>
+          <a class="link-view" (click)="sendId(bug._id)"
+            ><u> {{ bug.title }}</u></a
+          >
+        </td>
         <td>
           {{ bug.description }}
         </td>

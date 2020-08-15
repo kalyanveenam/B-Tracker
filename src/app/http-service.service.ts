@@ -44,13 +44,14 @@ export class HttpServiceService {
     header['Content-Type'] = 'application/json';
     return this._http.post(
       this.baseUrl + '/create/bug',
-      JSON.stringify({
+    {
         title: title,
         description: description,
         priority: priority,
         Attachment: "support soon",
         assignee: assignee,
-      }),
+        reporter: localStorage.getItem('username')
+      },
       { headers: header }
     );
   }
@@ -77,6 +78,14 @@ export class HttpServiceService {
     header['Authorization'] = localStorage.getItem('token');
    
     return this._http.get(this.baseUrl + '/users/all/', {headers: header });
+  }
+  public getTrackersByAssignee(assignee) { 
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    console.log(this.baseUrl + '/bugs/sort/assignee');
+    return this._http.post(this.baseUrl + '/bugs/sort/assignee', {
+      assignee: assignee
+    }, {headers: header });
   }
 
 }

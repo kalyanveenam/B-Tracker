@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   constructor(public Http: HttpServiceService, public toastr: ToastrService,public router: Router) {}
   public trackers;
+  public isAssignee: boolean = true;
+  public isReporter: boolean=false;
+  public assignees;
   ngOnInit(): void {
     this.getBugs();
   }
@@ -34,5 +37,21 @@ export class DashboardComponent implements OnInit {
 
    
   }
+  getBugsByAssignee() { 
+    this.isAssignee = false;
+    this.isReporter = true;
+    console.log(localStorage.getItem('username'))
+    this.Http.getTrackersByAssignee(localStorage.getItem('username')).subscribe((response) => { 
+      console.log(response)
+      this.trackers = response['data'];
+
+    })
+  }
+  bugdReportedByUser() { 
+    this.isAssignee = true;
+    this.isReporter = false;
+    this.getBugs();
+  }
+ 
 
 }

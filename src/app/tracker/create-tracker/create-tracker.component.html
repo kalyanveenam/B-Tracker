@@ -1,123 +1,141 @@
 <form #formDetails="ngForm" (ngSubmit)="onSubmit(formDetails.value)">
-<div id="accordion">
-
-
-  <div class="card">
-    <div class="card-header coll" id="headingOne">
-      <h5 class="mb-0">
-        <button
-          class="btn general-sec dropdown-toggle"
-          data-toggle="collapse"
-          data-target="#collapseOne"
-          aria-expanded="true"
-          aria-controls="collapseOne"
-        >
-          General
-        </button>
-      </h5>
+  <div
+    class="btn-group mt-2 mb-0 btngroup divchild btn-view"
+    role="group"
+    aria-label="Basic example"
+  >
+    <div class="mr">
+ 
+      <button
+        type="submit"
+        class="btn btn-secondary btn-color pl-4"
+        style="color: black;"
+      
+      >
+        Save and close
+      </button>
+ 
     </div>
-    <div
-      id="collapseOne"
-      class="collapse show"
-      aria-labelledby="headingOne"
-      data-parent="#accordion"
-    >
-      <div class="create-bug">
-        <div class="form-group title-input">
-          <label class="title" for="Title">Title</label>
-          <input
-            type="email"
-            class="form-control"
-            id="Title"
-            aria-describedby="emailHelp"
-            placeholder="Overview of bug"
-            name="title"
-            ngModel
-          />
-          <div class="form-group">
-            <label for="comment">Description:</label>
-
-            <textarea
+  </div>
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header coll" id="headingOne">
+        <h5 class="mb-0">
+          <button
+            class="btn general-sec dropdown-toggle"
+            data-toggle="collapse"
+            data-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            General
+          </button>
+        </h5>
+      </div>
+      <div
+        id="collapseOne"
+        class="collapse show"
+        aria-labelledby="headingOne"
+        data-parent="#accordion"
+      >
+        <div class="create-bug">
+          <div class="form-group title-input" >
+            <label class="title" for="Title">Title</label>
+            <input
+              type="email"
               class="form-control"
-              rows="5"
-              id="comment"
-              placeholder="Add bug description here"
-              ngModel
-              name="description"
-            ></textarea>
+              id="Title"
+              aria-describedby="emailHelp"
+              placeholder="Overview of bug"
+              name="title"
+             ngModel
+             
+            />
+  
+            <div class="form-group">
+              <label for="comment">Description:</label>
+  
+              <textarea
+                class="form-control"
+                rows="5"
+                id="comment"
+                placeholder="Add bug description here"
+               
+                name="description"
+            ngModel
+                          ></textarea>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="card">
-
-  <div class="card-header coll" id="headingTwo">
-    <h5 class="mb-0">
-      <button
-        class="btn general-sec dropdown-toggle"
-        data-toggle="collapse"
-        data-target="#collapseTwo"
-        aria-expanded="false"
-        aria-controls="collapseTwo"
-        
-      >
-        Advanced
-      </button>
-    </h5>
-  </div>
-  <div
-    id="collapseTwo"
-    class="collapse show"
-    aria-labelledby="headingTwo"
-    data-parent="#accordion"
-  >
-    <div class="create-bug">
-      <div class="advanced-input">
-        <div class="select-btn">
-          <label for="comment">Priority:</label>
-          <br />
-          <select class="browser-default custom-select" name="priority" ngModel>
-
-            <option *ngFor="let priority of priorities"  >{{priority.name}}</option>
-       
-          </select>
-               <br />
-        </div>
-        <div class="attachment">
-          <form>
-            <div class="form-group" ngModel>
+  
+  <div class="card">
+    <div class="card-header coll" id="headingTwo">
+      <h5 class="mb-0">
+        <button
+          class="btn general-sec dropdown-toggle"
+          data-toggle="collapse"
+          data-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
+          Advanced
+        </button>
+      </h5>
+    </div>
+    <div
+      id="collapseTwo"
+      class="collapse show"
+      aria-labelledby="headingTwo"
+      data-parent="#accordion"
+    >
+      <div class="create-bug">
+        <div class="advanced-input">
+  
+          <div class="attachment">
+         
+            <div class="form-group">
+              <br />
               <label for="comment">Upload Attachment:</label>
               <input
                 type="file"
                 class="form-control-file"
                 id="exampleFormControlFile1"
-                
-                name="attchment"
+              
               />
             </div>
-          </form>
-        </div>
-      </div>
-      <div class="assignee-name">
-        <label for="assignee">Assignee</label>
-        <input type="email" class="form-control" id="assignee" name="assignee" ngModel />
-      </div>
+            <label for="comment">Priority:</label>
+            <br />
   
+          <select
+          class="browser-default custom-select priority-mob"
+           name="priority" ngModel
+        >
+        <option *ngFor="let priority of priorities" >{{priority.name}}</option> 
+        </select>
+     
+            <label for="comment">Assignee</label>
+            <select
+            class="browser-default custom-select  priority-mob"
+          
+            name="assignee" 
+          ngModel
+          >
+          <option *ngFor="let assignee of assignees" [value]="assignee.name">{{assignee.name}}</option> 
+  
+          </select>
+  
+           
+          </div>
+    
+        <br />
+        </div>
+       
+      </div>
     </div>
-
   </div>
-  <button
-  type="submit"
-  class="btn btn-secondary btn-color pl-3"
-  style="color: black;"
-
->
-  Save and close
-</button>
-
-
-</div>
-</form>
+  </form>
+  
+  

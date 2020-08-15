@@ -13,21 +13,35 @@ export class CreateTrackerComponent implements OnInit {
     { id: 1, name: 'p2' },
     { id: 2, name: 'p2' },
   ];
+  public assignees;
   constructor(
     public Http: HttpServiceService,
     public toastr: ToastrService,
     public router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAllUsers();
+  }
+
+  public getAllUsers() { 
+    this.Http.getAllUsers().subscribe((response) => { 
+      console.log(response)
+      this.assignees = response;
+
+    })
+  }
+
   public onSubmit(data) {
     this.Http.createTracker(
       data.title,
       data.description,
       data.priority,
-      data.assignee
+      data.assignee,
+    
     ).subscribe(
       (response) => {
+        console.log(response)
         if (response) {
           this.toastr.success(
             'Bug is created sucessfully',
