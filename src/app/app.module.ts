@@ -9,7 +9,7 @@ import { TrackerModule } from './tracker/tracker.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     ToastrModule.forRoot({ positionClass: 'toast-top-right' }),
     ToastContainerModule,
-    NgxSpinnerService
+    
   ],
   providers: [HttpServiceService],
   bootstrap: [AppComponent],
