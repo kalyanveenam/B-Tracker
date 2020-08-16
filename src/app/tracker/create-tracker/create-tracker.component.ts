@@ -11,7 +11,7 @@ export class CreateTrackerComponent implements OnInit {
   public priorities = [
     { id: 0, name: 'p1' },
     { id: 1, name: 'p2' },
-    { id: 2, name: 'p2' },
+    { id: 2, name: 'p3' },
   ];
   public assignees;
   constructor(

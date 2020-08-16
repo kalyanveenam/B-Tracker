@@ -28,6 +28,7 @@ export class ViewTrackerComponent implements OnInit {
     { name: 'reject' },
   ];
   public assignees;
+  public allComments;
   
 
   changeStatus() {
@@ -75,5 +76,20 @@ export class ViewTrackerComponent implements OnInit {
         );
       }
     );
+  }
+  public getComments() { 
+   
+    this.Http.getCommentsByBugId(localStorage.getItem('currentId')).subscribe((response) => { 
+      console.log(response)
+      this.allComments = response['data'];
+
+    })
+  }
+  public createComment(value) { 
+    this.Http.createComment(value.comment).subscribe((response) => {
+      
+      this.getComments()
+
+     })
   }
 }

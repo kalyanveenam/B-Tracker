@@ -70,9 +70,49 @@ button-grp {
   margin-bottom: 3vh;
  
 }
+.comment{
+  margin-top: 2vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  margin-bottom: 1vh;
+}
+.comment-cards{
+  margin-left: 20vw;
+  margin-right: 20vw;
+  display: flex;
+  background-color: #d6e4ed;
+    flex-direction: column;
+    max-height: 60vh;
+    overflow: auto;
+}
+.comment-input{
+  margin-left: 20vw;
+  background-color: #faf8ff;
+width: 60%;
+margin-bottom: 10vw;
+border: grey;
+}
+.user-name{
+  color: #0e19b6;
 
+}
+.view-com{
+  text-decoration: underline;
+  margin-right: 20vw;
+  margin-left: 20vw;
+
+}
+.card-space{
+  border: 0.1pc solid grey;
+   border-width: thin;
+   border-radius: 2px;
+ }
 @media(min-width:0px) and (max-width:760px) {
-
+.card-space{
+ border: 0.1pc solid grey;
+  border-width: thin;
+  border-radius: 2px;
+}
   .btn-view{
     margin-top: 15vh !important;
     margin-right: 15vw;
@@ -117,6 +157,30 @@ padding-left: 6vw
   padding-left: 2vw;
   width: 60vw;
 }
+.comment{
+  margin-top: 2vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  margin-bottom: 1vh;
+}
+.comment-cards{
+  margin-left: 2vh;
+  margin-right: 2vh;
+  display: flex;
+  background-color: #faf8ff;
+    flex-direction: column;
+    max-height: 50vh;
+    overflow: auto;
+}
+.comment-input{
+  width: 97%;
+  margin-left: 8vw;
+  background-color: #faf8ff;
+}
+.combtn{
+  color: #343a40;
+}
+
 }
 
 

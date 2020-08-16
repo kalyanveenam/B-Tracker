@@ -36,7 +36,7 @@ export class HttpServiceService {
     console.log(localStorage.getItem('token'));
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
-    return this._http.get(this.baseUrl + '/bugs', {headers: header });
+    return this._http.get(this.baseUrl + '/bugs', { headers: header });
   }
   public createTracker(title, description, priority, assignee) {
     var header = {};
@@ -44,13 +44,13 @@ export class HttpServiceService {
     header['Content-Type'] = 'application/json';
     return this._http.post(
       this.baseUrl + '/create/bug',
-    {
+      {
         title: title,
         description: description,
         priority: priority,
-        Attachment: "support soon",
+        Attachment: 'support soon',
         assignee: assignee,
-        reporter: localStorage.getItem('username')
+        reporter: localStorage.getItem('username'),
       },
       { headers: header }
     );
@@ -61,31 +61,56 @@ export class HttpServiceService {
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
     console.log(this.baseUrl + '/bugs/' + id);
-    return this._http.get(this.baseUrl + '/bugs/'+id, {headers: header });
+    return this._http.get(this.baseUrl + '/bugs/' + id, { headers: header });
   }
-  public updateTracker(id,data) { 
-      var header = {};
+  public updateTracker(id, data) {
+    var header = {};
     header['Authorization'] = localStorage.getItem('token');
     header['Content-Type'] = 'application/json';
-    return this._http.post(
-      this.baseUrl + '/bugs/update/'+id,
-      data,
-      { headers: header }
-    );
+    return this._http.post(this.baseUrl + '/bugs/update/' + id, data, {
+      headers: header,
+    });
   }
   public getAllUsers() {
-       var header = {};
+    var header = {};
     header['Authorization'] = localStorage.getItem('token');
-   
-    return this._http.get(this.baseUrl + '/users/all/', {headers: header });
+
+    return this._http.get(this.baseUrl + '/users/all/', { headers: header });
   }
-  public getTrackersByAssignee(assignee) { 
+  public getTrackersByAssignee(assignee) {
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
     console.log(this.baseUrl + '/bugs/sort/assignee');
-    return this._http.post(this.baseUrl + '/bugs/sort/assignee', {
-      assignee: assignee
-    }, {headers: header });
+    return this._http.post(
+      this.baseUrl + '/bugs/sort/assignee',
+      {
+        assignee: assignee,
+      },
+      { headers: header }
+    );
   }
 
+  public getCommentsByBugId(bugid) {
+    console.log(localStorage.getItem('token'));
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    console.log(this.baseUrl + '/bugs/comments/all?id=' + bugid);
+    return this._http.get(this.baseUrl + '/bugs/comments/all?id=' + bugid, {
+      headers: header,
+    });
+  }
+  public createComment(comments) {
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    header['Content-Type'] = 'application/json';
+    return this._http.post(
+      this.baseUrl + '/bugs/comments',
+      {
+        username: localStorage.getItem('username'),
+        comment: comments,
+        bugId: localStorage.getItem('currentId'),
+      },
+      { headers: header }
+    );
+  }
 }

@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
   }
   sendId(data) {
     console.log(data)
-
+ localStorage.setItem('currentId',data._id)
     this.router.navigate(['viewTracker',data]);
 
    
