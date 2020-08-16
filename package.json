@@ -10,6 +10,7 @@
     "e2e": "ng e2e",
     "postinstall": "ng build --aot ",
     "install": "npm install"
+    
   },
   "private": true,
   "dependencies": {
