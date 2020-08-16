@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../../http-service.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -11,11 +12,13 @@ export class SignupComponent implements OnInit {
   constructor(
     public httpService: HttpServiceService,
     public router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {}
   onSubmit(signupdata) {
+    this.spinner.show();
     this.httpService
       .signup(
         signupdata.name,
@@ -25,13 +28,11 @@ export class SignupComponent implements OnInit {
       )
       .subscribe(
         (response) => {
-          console.log(response)
-          if (response['error']==true) {
-            this.toastr.error(
-              'Missing mandatory fields! Please try again'
-            );
-          }
-          else {
+          this.spinner.hide();
+          console.log(response);
+          if (response['error'] == true) {
+            this.toastr.error('Missing mandatory fields! Please try again');
+          } else {
             console.log(response);
             this.toastr.success(
               'Signup Sucessful!',
