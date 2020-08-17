@@ -23,6 +23,7 @@ export class SigninComponent implements OnInit {
           this.router.navigate(['dashboard']);
           localStorage.setItem('token', response['data']['token']['token']);
           localStorage.setItem('username', response['data']['userDetails']['name']);
+          localStorage.setItem('isLoggedin', 'true');
         }
       },
       (error) => {
