@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build": "ng build",
-    "postinstall": "ng build  --aot --target=production"
+    "postinstall": "ng build --aot "
   },
   "private": true,
   "dependencies": {
@@ -23,14 +23,12 @@
     "@popperjs/core": "^2.4.4",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
-    "ngx-spinner": "^10.0.1",
     "ngx-toastr": "^13.0.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.1",
     "typescript": "~3.9.5",
     "zone.js": "~0.10.3"
-
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1000.6",
@@ -52,7 +50,6 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.9.5"
-
   },
   "engines": {
     "node": "v12.14.1",
