@@ -5,7 +5,7 @@ console.log(__dirname + "/dist/BTracker/index.html");
 app.use(express.static(__dirname + "/dist/BTracker"));
 app.listen(process.env.PORT || 8081);
 
-app.get("/*", function (req, res) {
+app.get('/*', function (req, res) {
   console.log(__dirname + "BTracker/dist/index.html");
   res.sendFile(path.join(__dirname + "BTracker/dist/index.html"));
 });
