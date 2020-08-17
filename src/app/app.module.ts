@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -28,7 +28,9 @@ import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
     ToastContainerModule,
     
   ],
-  providers: [HttpServiceService],
+  providers: [HttpServiceService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
