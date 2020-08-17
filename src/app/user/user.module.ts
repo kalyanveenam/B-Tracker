@@ -6,10 +6,11 @@ import { SignupComponent } from './signup/signup.component';
 import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule } from '@angular/forms';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [HomeComponent, SigninComponent, SignupComponent],
-  imports: [CommonModule, SharedModule, AppRoutingModule, FormsModule],
+  imports: [CommonModule, SharedModule, AppRoutingModule, FormsModule,NgxSpinnerModule],
  
 })
 export class UserModule {}

@@ -22,6 +22,7 @@ export class CreateTrackerComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsers();
+  
   }
 
   public getAllUsers() { 
