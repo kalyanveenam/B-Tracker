@@ -28,7 +28,9 @@
     "rxjs": "~6.5.5",
     "tslib": "^2.0.1",
     "typescript": "~3.9.5",
-    "zone.js": "~0.10.3"
+    "zone.js": "~0.10.3",
+    "@angular/cli": "^10.0.6",
+    "@angular/compiler-cli": "^10.0.9"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1000.6",
