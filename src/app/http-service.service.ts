@@ -113,5 +113,13 @@ export class HttpServiceService {
       { headers: header }
     );
   }
-  let 
+  public getAttachmentsByBugId(bugid) {
+    console.log(localStorage.getItem('token'));
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    console.log(this.baseUrl + '/get/attachments?id=' + bugid);
+    return this._http.get(this.baseUrl + '/get/attachments?id=' + bugid, {
+      headers: header
+    });
+  }
 }

@@ -8,50 +8,59 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(public Http: HttpServiceService, public toastr: ToastrService,public router: Router) {}
+  constructor(
+    public Http: HttpServiceService,
+    public toastr: ToastrService,
+    public router: Router
+  ) {}
   public trackers;
   public isAssignee: boolean = true;
-  public isReporter: boolean=false;
+  public isReporter: boolean = false;
   public assignees;
   ngOnInit(): void {
     this.getBugs();
+    this.getAttaachmentsById();
   }
   public getBugs() {
     this.Http.getTrackers().subscribe((response) => {
-      console.log(response['data'])
-     
+      console.log(response['data']);
+
       this.trackers = response['data'];
 
-        console.log(this.trackers);
-        this.toastr.success(
-          'Listing blogs reported by ' +
-            localStorage.getItem('username')
-        );
-      
+      console.log(this.trackers);
+      this.toastr.success(
+        'Listing blogs reported by ' + localStorage.getItem('username')
+      );
     });
   }
   sendId(data) {
-    console.log(data)
- localStorage.setItem('currentId',data._id)
-    this.router.navigate(['viewTracker',data]);
-
-   
+    console.log(data);
+    localStorage.setItem('currentId', data._id);
+    this.router.navigate(['viewTracker', data]);
   }
-  getBugsByAssignee() { 
+  getBugsByAssignee() {
     this.isAssignee = false;
     this.isReporter = true;
-    console.log(localStorage.getItem('username'))
-    this.Http.getTrackersByAssignee(localStorage.getItem('username')).subscribe((response) => { 
-      console.log(response)
-      this.trackers = response['data'];
-
-    })
+    console.log(localStorage.getItem('username'));
+    this.Http.getTrackersByAssignee(localStorage.getItem('username')).subscribe(
+      (response) => {
+        console.log(response);
+        this.trackers = response['data'];
+      }
+    );
   }
-  bugdReportedByUser() { 
+  getAttaachmentsById() {
+    console.log(localStorage.getItem('currentId'));
+    this.Http.getAttachmentsByBugId(
+      localStorage.getItem('currentId')
+    ).subscribe((response) => {
+      console.log(response);
+      // this.trackers = response['data'];
+    });
+  }
+  bugdReportedByUser() {
     this.isAssignee = true;
     this.isReporter = false;
     this.getBugs();
   }
- 
-
 }
