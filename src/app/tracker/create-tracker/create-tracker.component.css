@@ -51,7 +51,12 @@
   color: #343a40;
 }
 .btn-color {
-  background-color: transparent !important;
+  background-color:#343a40 !important;
+  color: aliceblue !important;
+}
+.saveclose{
+  margin-left: 35vw;
+  margin-right: 35vw;
 }
 button-grp {
   margin-top: 40px;

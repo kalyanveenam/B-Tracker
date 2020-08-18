@@ -1,7 +1,9 @@
 .btn-color {
-  background-color: transparent !important;
+  background-color: rgb(209, 209, 243) !important;
 }
-
+.btn-color:hover {
+  background-color: rgb(162, 162, 185) !important;
+}
 .searchandbuttons{
   margin-top: 15vh;
 }

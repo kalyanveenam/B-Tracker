@@ -38,19 +38,12 @@ export class DashboardComponent implements OnInit {
   public getBugs() {
     this.spinner.show();
     this.Http.getTrackers().subscribe((response) => {
-      this.spinner.hide();
-      console.log(response['data']);
-
+    
       this.trackers = response['data'];
-
-      console.log(this.trackers);
-      this.toastr.success(
-        'Listing blogs reported by ' + localStorage.getItem('username')
-      );
+      this.spinner.hide();
     });
   }
   sendId(data) {
-    console.log(data);
     localStorage.setItem('currentId', data._id);
     this.router.navigate(['viewTracker', data]);
   }
