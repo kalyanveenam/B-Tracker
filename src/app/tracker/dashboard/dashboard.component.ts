@@ -2,7 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../../http-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxPaginationModule } from 'ngx-pagination';
+export interface Person {
+  title: string;
+  description: string;
+  status: string;
+  priority: string;
+  assignee: string;
+  reporter: string;
+  createdDate: string;
+}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -19,6 +29,9 @@ export class DashboardComponent implements OnInit {
   public isAssignee: boolean = true;
   public isReporter: boolean = false;
   public assignees;
+  public term;
+  p: number = 1;
+
   ngOnInit(): void {
     this.getBugs();
   }
@@ -37,14 +50,11 @@ export class DashboardComponent implements OnInit {
     });
   }
   sendId(data) {
-  
     console.log(data);
     localStorage.setItem('currentId', data._id);
     this.router.navigate(['viewTracker', data]);
-   
   }
   getBugsByAssignee() {
-    
     this.isAssignee = false;
     this.isReporter = true;
     this.spinner.show();

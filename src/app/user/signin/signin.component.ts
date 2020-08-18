@@ -34,6 +34,7 @@ export class SigninComponent implements OnInit {
         }
       },
       (error) => {
+        this.spinner.hide();
         this.toastr.error('email or password is incorrect ');
       }
     );

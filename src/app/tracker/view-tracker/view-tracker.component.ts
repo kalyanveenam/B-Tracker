@@ -26,6 +26,9 @@ export class ViewTrackerComponent implements OnInit {
   public bugData;
   buttonDisabled: Boolean = true;
   public bugId;
+  fileToUpload: File = null;
+  files: FileList;
+
   public priorities = [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }];
   public statusList = [
     { name: 'open' },
@@ -37,7 +40,7 @@ export class ViewTrackerComponent implements OnInit {
   ];
   public assignees;
   public allComments;
-
+  public imageData=[];
   changeStatus() {
     this.buttonDisabled = false;
   }
@@ -98,6 +101,13 @@ export class ViewTrackerComponent implements OnInit {
         this.spinner.hide();
         console.log(response);
         this.allComments = response['data'];
+      },
+      (error) => { 
+        this.spinner.hide();
+        this.toastr.error(
+          'Unable to get comments!',
+          error
+        );
       }
     );
   }
@@ -108,25 +118,39 @@ export class ViewTrackerComponent implements OnInit {
     });
   }
   public getAttachments() {
-    console.log('hieee '+localStorage.getItem('currentId') + " sff");
-    this.Http.getAttachmentsByBugId(
-      localStorage.getItem('currentId')
-    ).subscribe((response) => {
-      console.log('hi' + JSON.stringify(response));
-   
-        let bufferAttach = response['data'][0]['attachments']['data'];
+    setTimeout(() => {
 
-        let TYPED_ARRAY = new Uint8Array(bufferAttach);
-        const STRING_CHAR = TYPED_ARRAY.reduce((data, byte) => {
-          return data + String.fromCharCode(byte);
-        }, '');
-  
-        let base64String = btoa(STRING_CHAR);
-        //  console.log(base64String);
-        let imageurl = this.domSanitizer.bypassSecurityTrustUrl(
-          'data:image/jpg;base64,' + base64String
-      );
-      console.log('bd is ' + imageurl);
-    });
+      this.Http.getAttachmentsByBugId(
+        localStorage.getItem('currentId')
+      ).subscribe((response) => {
+       // console.log('hi' +  response['data'][0]['attachments']['data']);
+        let count = Object.keys(response['data']).length   
+       console.log("ct ::"+count)
+        for (let i = 0; i < count; i++) { 
+          let bufferAttach = response['data'][i]['attachments']['data'];
+        
+       
+          let TYPED_ARRAY = new Uint8Array(bufferAttach);
+          const STRING_CHAR = TYPED_ARRAY.reduce((data, byte) => {
+            return data + String.fromCharCode(byte);
+          }, '');
+    
+          let base64String = btoa(STRING_CHAR);
+          //  console.log(base64String);
+          let imageurl = this.domSanitizer.bypassSecurityTrustUrl(
+            'data:image/jpg;base64,' + base64String
+        );
+          this.imageData.push(imageurl['changingThisBreaksApplicationSecurity']);
+            console.log("this data:"+JSON.stringify(this.imageData));
+        }   
+
+      }); 
+    }, 3000);
+    
   }
+  public createAttachments(files: FileList) {
+    console.log(files);
+    this.Http.postMethod(files);
+  }
+ 
 }

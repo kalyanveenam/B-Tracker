@@ -7,6 +7,7 @@
       placeholder="Search with any Keyword"
       aria-label="Recipient's username"
       aria-describedby="basic-addon2"
+      [(ngModel)]="term"
     />
     <div class="input-group-append">
       <button class="btn btn-outline-secondary" type="button">Search</button>
@@ -70,7 +71,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let bug of trackers">
+      <tr *ngFor="let bug of trackers|filter:term | paginate:{itemsPerPage:10,currentPage: p};">
         <td scope="row">
           <a class="link-view" (click)="sendId(bug._id)"
             ><u> {{ bug.title }}</u></a
@@ -87,5 +88,5 @@
     </tbody>
   </table>
 </div>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
 <app-footer></app-footer>
-<ngx-spinner></ngx-spinner>

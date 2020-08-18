@@ -107,6 +107,30 @@ border: grey;
    border-width: thin;
    border-radius: 2px;
  }
+ * {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+ 
+}
+.row{
+  background-color: #fafafa;
+  border: 1px black;
+}
+
+
+
 @media(min-width:0px) and (max-width:760px) {
 .card-space{
  border: 0.1pc solid grey;

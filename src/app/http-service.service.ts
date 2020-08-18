@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpRequest,
+  HttpEvent,
+  HttpParams,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HttpServiceService {
   public baseUrl = 'https://btracker-backend.herokuapp.com/api/v1';
+  fileToUpload: File = null;
+
   constructor(public _http: HttpClient, public toastr: ToastrService) {
     console.log('HTTP service constructor is called');
   }
@@ -119,7 +126,19 @@ export class HttpServiceService {
     header['Authorization'] = localStorage.getItem('token');
     console.log(this.baseUrl + '/get/attachments?id=' + bugid);
     return this._http.get(this.baseUrl + '/get/attachments?id=' + bugid, {
-      headers: header
+      headers: header,
     });
   }
+ public  postMethod(files: FileList) {
+    this.fileToUpload = files.item(0);
+    let formData = new FormData();
+    formData.append('attachments', this.fileToUpload, this.fileToUpload.name);
+   
+   this._http.post(this.baseUrl + '/create/attachment?bugId=' + localStorage.getItem('currentId'), formData).subscribe((val) => {
+
+      console.log(val);
+      }) 
+ }    
+
+  
 }

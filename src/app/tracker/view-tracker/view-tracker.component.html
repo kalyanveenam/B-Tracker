@@ -103,19 +103,45 @@
       aria-labelledby="headingTwo"
       data-parent="#accordion"
     >
+  
       <div class="create-bug">
         <div class="advanced-input">
           <div class="attachment">
             <div class="form-group">
               <br />
               <label for="comment">Upload Attachment:</label>
-              <input
-                type="file"
-                class="form-control-file"
-                id="exampleFormControlFile1"
-                [disabled]="buttonDisabled"
-              />
+              <form>
+                <input id="myForm" type="file" name="file" (change)="createAttachments($event.target.files)">
+                </form>
+             
+            
+             </div> 
+           
+            
+            <div class="row" >
+              <div class="column" *ngFor="let image of imageData">
+                <img src={{image}} alt="Red dot"  width="90" height="70" >
+              </div>
+            
+               
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <label for="comment">Priority:</label>
             <br />
 

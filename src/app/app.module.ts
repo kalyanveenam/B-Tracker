@@ -12,8 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -28,11 +30,13 @@ import { NgxSpinnerModule } from "ngx-spinner";
     BrowserAnimationsModule,
     ToastrModule.forRoot({ positionClass: 'toast-top-right' }),
     ToastContainerModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    Ng2SearchPipeModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [HttpServiceService,
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  providers: [
+    HttpServiceService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],
 })

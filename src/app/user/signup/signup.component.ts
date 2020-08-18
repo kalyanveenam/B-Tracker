@@ -43,6 +43,7 @@ export class SignupComponent implements OnInit {
           }
         },
         (error) => {
+          this.spinner.hide();
           console.log(error);
           this.toastr.error(
             error,
