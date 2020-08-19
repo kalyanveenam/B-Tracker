@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class HttpServiceService {
-  public baseUrl = 'https://btracker-backend.herokuapp.com/api/v1';
+  public baseUrl = 'http://localhost:3001/api/v1';
   fileToUpload: File = null;
 
   constructor(public _http: HttpClient, public toastr: ToastrService) {
@@ -22,7 +22,7 @@ export class HttpServiceService {
   public signin(username, password) {
     return this._http.post(
       this.baseUrl + '/user/login',
-      JSON.stringify({ email: username, password: password }),
+  { email: username, password: password },
       { headers: { 'Content-Type': 'application/json' } }
     );
   }
@@ -129,16 +129,92 @@ export class HttpServiceService {
       headers: header,
     });
   }
- public  postMethod(files: FileList) {
+  public postMethod(files: FileList) {
     this.fileToUpload = files.item(0);
     let formData = new FormData();
     formData.append('attachments', this.fileToUpload, this.fileToUpload.name);
-   
-   this._http.post(this.baseUrl + '/create/attachment?bugId=' + localStorage.getItem('currentId'), formData).subscribe((val) => {
 
-      console.log(val);
-      }) 
- }    
+    this._http
+      .post(
+        this.baseUrl +
+          '/create/attachment?bugId=' +
+          localStorage.getItem('currentId'),
+        formData
+      )
+      .subscribe((val) => {
+        console.log(val);
+      });
+  }
+  public addToWatchlist(
+    userid,
+    bugid,
+    username,
+    status,
+    title,
+    priority,
+    description,
+    assignee
+  ) {
+    console.log(localStorage.getItem('token'));
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    console.log(this.baseUrl + '/add/watcher?id=' + bugid);
+    return this._http.post(
+      this.baseUrl + '/add/watcher?userId=' + userid + '&bugId=' + bugid,
+      {
+        username: username,
+        title: title,
+        priority: priority,
+        status: status,
+        description: description,
+        assignee: assignee,
+      },
+      {
+        headers: header,
+      }
+    );
+  }
+  public getWatchedBugsByUserId(userId) {
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    header['Content-Type'] = 'application/json';
+    console.log(this.baseUrl + '/get/bugsByUserId?id=' + userId);
+    return this._http.get(
+      this.baseUrl + '/get/bugsByUserId?id=' + userId,
 
-  
+      {
+        headers: header,
+      }
+    );
+  }
+  public getWatchedUsersByBugId(bugid) {
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    header['Content-Type'] = 'application/json';
+    return this._http.get(
+      this.baseUrl + '/get/usersBybugId?id=' + bugid,
+
+      {
+        headers: header,
+      }
+    );
+  }
+  public logout() {
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    header['Content-Type'] = 'application/json';
+    return this._http.post(
+      this.baseUrl + '/user/logout',
+      {},
+      {
+        headers: header,
+      }
+    );
+  }
+  public postFile(fileToUpload: File) {
+    const endpoint = this.baseUrl + '/uploadAttachment';
+    const formData: FormData = new FormData();
+    formData.append('attachment', fileToUpload, fileToUpload.name);
+    return this._http.post(endpoint, formData);
+  }
 }

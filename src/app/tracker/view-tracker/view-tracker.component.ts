@@ -8,7 +8,7 @@ import {
   SafeResourceUrl,
   SafeUrl,
 } from '@angular/platform-browser';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-view-tracker',
   templateUrl: './view-tracker.component.html',
@@ -24,6 +24,7 @@ export class ViewTrackerComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {}
   public bugData;
+  public watchedIssues;
   buttonDisabled: Boolean = true;
   public bugId;
   fileToUpload: File = null;
@@ -40,15 +41,15 @@ export class ViewTrackerComponent implements OnInit {
   ];
   public assignees;
   public allComments;
-  public imageData=[];
+  public imageData = [];
   changeStatus() {
     this.buttonDisabled = false;
   }
   ngOnInit(): void {
-    
     this.viewID();
     this.getAllUsers();
     this.getAttachments();
+    this.bugsByUserId()
   }
   public getAllUsers() {
     this.Http.getAllUsers().subscribe((response) => {
@@ -57,16 +58,18 @@ export class ViewTrackerComponent implements OnInit {
     });
   }
 
-
   public viewID() {
-    
     this.route.params.subscribe((params) => {
       console.log(params);
       this.Http.getTrackerById(params['id']).subscribe(
         (response) => {
-       
+          localStorage.setItem('status', response['data']['status']);
+          localStorage.setItem('title', response['data']['title']);
+          localStorage.setItem('discription', response['data']['description']);
+          localStorage.setItem('priority', response['data']['priority']);
+          localStorage.setItem('assignee', response['data']['assignee']);
           localStorage.setItem('currentId', response['data']['_id']);
-          console.log(response['data']);
+
           this.bugData = response['data'];
         },
         (error) => {
@@ -80,9 +83,15 @@ export class ViewTrackerComponent implements OnInit {
     this.spinner.show();
     console.log(data);
     this.Http.updateTracker(localStorage.getItem('currentId'), data).subscribe(
-      (result) => {
+      (response) => {
         this.spinner.hide();
-        console.log(result);
+        console.log(response);
+        localStorage.setItem('status', response['data']['status']);
+        localStorage.setItem('title', response['data']['title']);
+        localStorage.setItem('discription', response['data']['description']);
+        localStorage.setItem('priority', response['data']['priority']);
+        localStorage.setItem('assignee', response['data']['assignee']);
+        localStorage.setItem('currentId', response['data']['_id']);
         this.toastr.success('Updated tracker successfully');
         this.router.navigate(['/dashboard']);
       },
@@ -102,12 +111,9 @@ export class ViewTrackerComponent implements OnInit {
         console.log(response);
         this.allComments = response['data'];
       },
-      (error) => { 
+      (error) => {
         this.spinner.hide();
-        this.toastr.error(
-          'Unable to get comments!',
-          error
-        );
+        this.toastr.error('Unable to get comments!', error);
       }
     );
   }
@@ -119,38 +125,57 @@ export class ViewTrackerComponent implements OnInit {
   }
   public getAttachments() {
     setTimeout(() => {
-
       this.Http.getAttachmentsByBugId(
         localStorage.getItem('currentId')
       ).subscribe((response) => {
-       // console.log('hi' +  response['data'][0]['attachments']['data']);
-        let count = Object.keys(response['data']).length   
-       console.log("ct ::"+count)
-        for (let i = 0; i < count; i++) { 
+        // console.log('hi' +  response['data'][0]['attachments']['data']);
+        let count = Object.keys(response['data']).length;
+        console.log('ct ::' + count);
+        for (let i = 0; i < count; i++) {
           let bufferAttach = response['data'][i]['attachments']['data'];
-        
-       
+
           let TYPED_ARRAY = new Uint8Array(bufferAttach);
           const STRING_CHAR = TYPED_ARRAY.reduce((data, byte) => {
             return data + String.fromCharCode(byte);
           }, '');
-    
+
           let base64String = btoa(STRING_CHAR);
           //  console.log(base64String);
           let imageurl = this.domSanitizer.bypassSecurityTrustUrl(
             'data:image/jpg;base64,' + base64String
-        );
-          this.imageData.push(imageurl['changingThisBreaksApplicationSecurity']);
-            console.log("this data:"+JSON.stringify(this.imageData));
-        }   
-
-      }); 
+          );
+          this.imageData.push(
+            imageurl['changingThisBreaksApplicationSecurity']
+          );
+          console.log('this data:' + JSON.stringify(this.imageData));
+        }
+      });
     }, 3000);
-    
   }
   public createAttachments(files: FileList) {
     console.log(files);
     this.Http.postMethod(files);
   }
- 
+  public bugsByUserId() {
+    this.Http.getWatchedUsersByBugId(localStorage.getItem('currentId')).subscribe(
+      (response) => {
+        this.watchedIssues = response['data'];
+        console.log(response['data']);
+      }
+    );
+  }
+  public watchIssue() {
+    this.Http.addToWatchlist(
+      localStorage.getItem('userId'),
+      localStorage.getItem('currentId'),
+      localStorage.getItem('username'),
+      localStorage.getItem('status'),
+      localStorage.getItem('title'),
+      localStorage.getItem('priority'),
+      localStorage.getItem('discription'),
+      localStorage.getItem('assignee')
+    ).subscribe((response) => {
+      this.bugsByUserId();
+    });
+  }
 }

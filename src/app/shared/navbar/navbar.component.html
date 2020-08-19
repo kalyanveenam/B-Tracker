@@ -10,34 +10,15 @@
           /><br />
         </a>
       </div>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarResponsive"
-        aria-controls="navbarResponsive"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    <div class="container"></div>
+      
+   
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" [routerLink]="['/signin']"
-                >Login
-                <span class="sr-only">(current)</span>
-              </a>
-              
-            </li>
-            
-
-            <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
-            </li>
+          <ul class="navbar-nav ml-auto">
+            <app-logout isMobile='false'></app-logout>
           </ul>
         </div>
-    
+        <ul class="nav navbar-nav pull-left ml-auto d-xl-none d-lg-none" style="max-height: 5vh;">
+          <app-logout isMobile="true"></app-logout>
+      </ul>
   </nav>
 </body>

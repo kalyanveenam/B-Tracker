@@ -1,0 +1,7 @@
+.bardesign {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top: 5px solid #149ecc;
+    border-bottom: 5px solid #149ecc;
+    border-left: 5px solid #149ecc;
+}

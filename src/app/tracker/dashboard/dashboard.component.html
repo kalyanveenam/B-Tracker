@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="searchandbuttons">
   <div class="dashboard"></div>
   <div class="input-group mb-3 w-75 mt-5 pl-1 pr-1 divchild">
@@ -22,7 +23,7 @@
     <button
       type="button"
       class="btn btn-secondary btn-color pl-3"
-      style="color: black;"
+   
       data-toggle="tooltip"
       data-html="true"
       title="Click to sort with issues Assigned to you"
@@ -33,7 +34,7 @@
     <button
       type="button"
       class="btn btn-secondary btn-color pl-3"
-      style="color: black;"
+
       (click)="getBugsByAssignee()"
     >
       Assigned to me 
@@ -41,15 +42,17 @@
     <button
       type="button"
       class="btn btn-secondary btn-color pl-3"
-      style="color: black;"
+      (click)="bugsByUserId()"
     >
       Starred issues
     </button>
     <button
       type="button"
       class="btn btn-secondary btn-color pl-3"
-      style="color: black;"
+   
       [routerLink]="['/createTracker']"
+
+
     >
       Create
     </button>

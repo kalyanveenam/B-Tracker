@@ -20,24 +20,35 @@
       >
         Save and close
       </button>
+     
       <button
-        type="button"
-        class="btn btn-secondary btn-color pl-3"
-        style="color: black;"
-      >
-        Watch
-      </button>
+      type="button"
+      [routerLink]="['/dashboard']"
+      class="btn btn-secondary btn-color pl-3"
+      style="color: black;"
+    >
+      Cancel
+    </button>
+    <div class="dropdown watch-issue">
+      <button class="btn btn-primary dropdown-toggle watch-issue" type="button" data-toggle="dropdown">Watchers
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu" *ngFor="let watchers of watchedIssues">
+        <li>{{watchers.username}}</li>
+    
+        <li><button type="button" class="btn btn-primary" (click)="watchIssue()" >watch</button></li>
+      </ul>
+    </div>
     </div>
   </div>
   <div id="accordion">
     <div class="card">
       <div class="card-header coll" id="headingOne">
         <h5 class="mb-0">
-          <button
+          <button type="button"
             class="btn general-sec dropdown-toggle"
             data-toggle="collapse"
             data-target="#collapseOne"
-            aria-expanded="true"
+           
             aria-controls="collapseOne"
           >
             General
@@ -86,11 +97,11 @@
   <div class="card">
     <div class="card-header coll" id="headingTwo">
       <h5 class="mb-0">
-        <button
+        <button type="button"
           class="btn general-sec dropdown-toggle"
           data-toggle="collapse"
           data-target="#collapseTwo"
-          aria-expanded="false"
+        
           aria-controls="collapseTwo"
         >
           Advanced
@@ -196,11 +207,11 @@
   <div class="card">
     <div class="card-header coll" id="headingOne">
       <h5 class="mb-0">
-        <button
+        <button type="button"
         class="btn general-sec dropdown-toggle"
           data-toggle="collapse"
           data-target="#collapseTwo"
-          aria-expanded="false"
+         
           aria-controls="collapseTwo"
         >
           Comments:
@@ -235,8 +246,13 @@
           <button class="btn combtn" type="submit">POST</button>
     
         </div>
+     
       </div>
+      
     </form>
+    
   </div>
+  
 </div>
+
 <ngx-spinner></ngx-spinner>

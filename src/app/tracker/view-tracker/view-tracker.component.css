@@ -58,7 +58,7 @@ button-grp {
 }
 .mr {
  
-  margin-left: 40vw;
+  margin-left: 20vw;
 }
 .btn-view{
   margin-top: 15vh !important;
@@ -139,12 +139,13 @@ border: grey;
 }
   .btn-view{
     margin-top: 15vh !important;
-    margin-right: 15vw;
+  
     width: 100%;
   }
   .mr {
  
-    margin-left: 15vw;
+margin-left: 2vw;
+ margin-top: 10vh;
   }
   .create-bug {
     background-color: #ffffff;
@@ -203,6 +204,9 @@ padding-left: 6vw
 }
 .combtn{
   color: #343a40;
+}
+.watch-issue{
+  margin-right: 20vw;
 }
 
 }

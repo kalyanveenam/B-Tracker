@@ -1,10 +1,15 @@
+<app-navbar></app-navbar>
 <div class="wrapper fadeInDown form-login">
   <div id="formContent">
     <div class="fadeIn first">
       <img src="../../../assets/login-icon.png" id="icon" alt="User Icon" />
     </div>
 
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)" class="loginForm" >
+    <form
+      #loginForm="ngForm"
+      (ngSubmit)="onSubmit(loginForm.value)"
+      class="loginForm"
+    >
       <input
         type="text"
         id="login"

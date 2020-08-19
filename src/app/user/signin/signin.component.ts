@@ -31,6 +31,7 @@ export class SigninComponent implements OnInit {
           localStorage.setItem('token', response['data']['token']['token']);
           localStorage.setItem('username', response['data']['userDetails']['name']);
           localStorage.setItem('isLoggedin', 'true');
+          localStorage.setItem('userId', response['data']['userDetails']['_id']);
         }
       },
       (error) => {

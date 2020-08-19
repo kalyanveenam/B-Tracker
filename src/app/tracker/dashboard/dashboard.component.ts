@@ -30,10 +30,16 @@ export class DashboardComponent implements OnInit {
   public isReporter: boolean = false;
   public assignees;
   public term;
+  public watchedIssues;
   p: number = 1;
-
+  public btnstyle;
   ngOnInit(): void {
-    this.getBugs();
+   
+    this.btnstyle = 'btn-default';
+  }
+  changestyle() {
+    this.btnstyle = 'btn-change';
+
   }
   public getBugs() {
     this.spinner.show();
@@ -73,5 +79,14 @@ export class DashboardComponent implements OnInit {
     this.isAssignee = true;
     this.isReporter = false;
     this.getBugs();
+  }
+  public bugsByUserId() {
+    this.Http.getWatchedBugsByUserId(localStorage.getItem('userId')).subscribe(
+      (response) => {
+        console.log(response['data'])
+        this.trackers = response['data'];
+       
+      }
+    );
   }
 }

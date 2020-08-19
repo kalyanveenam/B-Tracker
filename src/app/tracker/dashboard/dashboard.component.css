@@ -1,12 +1,24 @@
 .btn-color {
   background-color: rgb(209, 209, 243) !important;
+  color: black;
 }
 .btn-color:hover {
-  background-color: rgb(162, 162, 185) !important;
+  background-color: #343a40 !important;
+  color: white;
 }
 .searchandbuttons{
   margin-top: 15vh;
 }
 .link-view:hover{
 color: rgb(2, 2, 112);
+}
+.btn-default {
+  color: white;
+  background-color: blue;
+
+}
+
+.btn-change {
+  color: Red;
+  background-color: white;
 }

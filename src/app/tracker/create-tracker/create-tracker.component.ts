@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-tracker.component.css'],
 })
 export class CreateTrackerComponent implements OnInit {
+  public attachmentFiles = [];
+  isUploaded: Boolean;
+  fileToUpload: File = null;
   public priorities = [
     { id: 0, name: 'p1' },
     { id: 1, name: 'p2' },
@@ -21,10 +24,22 @@ export class CreateTrackerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isUploaded = false;
     this.getAllUsers();
   
   }
-
+  public addFile(event) {
+    var attachment =  {};
+    this.fileToUpload = event.target.files.item(0);
+    console.log('yaay' + event.target.files[0].name);
+    attachment['name'] = event.target.files[0].name;
+    this.Http.postFile(this.fileToUpload).subscribe((res) => {
+      console.log('res is ' + res);
+      this.isUploaded = true;
+      attachment['path'] = "http://localhost:3001/files/"+attachment['name'];
+      this.attachmentFiles.push(attachment);
+    }), (err) => { console.log('err ' + err) };
+  };
   public getAllUsers() { 
     this.Http.getAllUsers().subscribe((response) => { 
       console.log(response)

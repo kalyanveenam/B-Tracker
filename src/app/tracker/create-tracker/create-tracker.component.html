@@ -84,11 +84,17 @@
             <div class="form-group">
               <br />
               <label for="comment">Upload Attachment:</label>
-              <input
-                type="file"
-                class="form-control-file"
-                id="exampleFormControlFile1"
-              />
+              
+                <div class="input-group">
+                    <div class="custom-file" id="form_div">
+                        <input ngModel type="file" class="custom-file-input" id="folder" aria-describedby="inputGroupFileAddon01" name="attachment" (change)="addFile($event)" required>
+                        <label id="labelForFolder" class="custom-file-label" for="inputGroupFile01">Upload attachment</label>
+                    </div>
+                </div>
+                <div *ngIf="isUploaded">
+                    <a *ngFor="let file of attachmentFiles" href="{{file.path}}">{{file.name}} <br/></a> <br /></div>
+                <button type="submit" class="btn btn-dark">Upload</button>
+         
             </div>
             <label for="comment">Priority:</label>
             <br />

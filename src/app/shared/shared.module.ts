@@ -3,19 +3,16 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CardComponent } from './card/card.component';
 import { FooterComponent } from './footer/footer.component';
-import { AppRoutingModule} from '../app-routing.module';
-
-
+import { AppRoutingModule } from '../app-routing.module';
+import { LogoutComponent } from './logout/logout.component';
 @NgModule({
-  declarations: [NavbarComponent, CardComponent, FooterComponent],
-  imports: [
-    CommonModule,
-    AppRoutingModule
-  ],
-  exports: [
+  declarations: [
     NavbarComponent,
     CardComponent,
-    FooterComponent
-  ]
+    FooterComponent,
+    LogoutComponent,
+  ],
+  imports: [CommonModule, AppRoutingModule],
+  exports: [NavbarComponent, CardComponent, FooterComponent, LogoutComponent],
 })
-export class SharedModule { }
+export class SharedModule {}
