@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { HttpServiceService } from '../../http-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 })
 export class CreateTrackerComponent implements OnInit {
   public attachmentFiles = [];
-  isUploaded: Boolean;
   fileToUpload: File = null;
   public priorities = [
     { id: 0, name: 'p1' },
@@ -24,40 +23,39 @@ export class CreateTrackerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isUploaded = false;
     this.getAllUsers();
-  
   }
   public addFile(event) {
-    var attachment =  {};
+    var attachment = {};
     this.fileToUpload = event.target.files.item(0);
-    console.log('yaay' + event.target.files[0].name);
     attachment['name'] = event.target.files[0].name;
     this.Http.postFile(this.fileToUpload).subscribe((res) => {
       console.log('res is ' + res);
-      this.isUploaded = true;
-      attachment['path'] = "http://localhost:3001/files/"+attachment['name'];
+      attachment['path'] = 'http://localhost:3001/files/' + attachment['name'];
       this.attachmentFiles.push(attachment);
-    }), (err) => { console.log('err ' + err) };
-  };
-  public getAllUsers() { 
-    this.Http.getAllUsers().subscribe((response) => { 
-      console.log(response)
+      console.log(JSON.stringify(this.attachmentFiles));
+    }),
+      (err) => {
+        console.log('err ' + err);
+      };
+  }
+  public getAllUsers() {
+    this.Http.getAllUsers().subscribe((response) => {
+      console.log(response);
       this.assignees = response;
-
-    })
+    });
   }
 
   public onSubmit(data) {
+    console.log('name' + data.attachment);
     this.Http.createTracker(
       data.title,
       data.description,
       data.priority,
-      data.assignee,
-    
+      data.assignee
     ).subscribe(
       (response) => {
-        console.log(response)
+        console.log(response);
         if (response) {
           this.toastr.success(
             'Bug is created sucessfully',
@@ -65,12 +63,20 @@ export class CreateTrackerComponent implements OnInit {
           );
           this.router.navigate(['dashboard']);
         }
+        console.log('test this:' + response['data']['_id']);
+        console.log()
+        this.Http.storeAttachment(response['data']['_id'],data.attachment).subscribe(
+          (response) => {
+      console.log(response)
+          }
+        );
       },
       (error) => {
         console.log(error);
         this.toastr.error('Unable to create a bug');
       }
     );
+
     console.log(data);
   }
 }

@@ -122,40 +122,20 @@
             <div class="form-group">
               <br />
               <label for="comment">Upload Attachment:</label>
-              <form>
-                <input id="myForm" type="file" name="file" (change)="createAttachments($event.target.files)">
-                </form>
-             
-            
-             </div> 
-           
-            
-            <div class="row" >
-              <div class="column" *ngFor="let image of imageData">
-                <img src={{image}} alt="Red dot"  width="90" height="70" >
-              </div>
-            
-               
+              
+                <div class="input-group">
+                    <div class="custom-file" id="form_div">
+                        <input ngModel type="file" class="custom-file-input" id="folder" aria-describedby="inputGroupFileAddon01" name="attachment" (change)="addFile($event)" required>
+                        <label id="labelForFolder" class="custom-file-label" for="inputGroupFile01">Upload attachment</label>
+                    </div>
+                </div>
+    
+                    <a *ngFor="let file of attachmentFiles" href="{{file.path}}">{{file.name}} <br/></a> <br />
+         
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+               <a *ngFor="let file of attachments" href="{{file.path}}">{{file.name}}<br/></a> <br />
             <label for="comment">Priority:</label>
-            <br />
+            
 
             <select
               class="browser-default custom-select priority-mob"

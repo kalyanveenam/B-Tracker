@@ -1,32 +1,60 @@
-<li *ngIf="!isLoggedIn && !isMobile" class="nav-item active ">
-    <button class="nav-link btn btn-info" [routerLink]="[ '/signin'] " style="color: white; width:5vw;">Log In</button>
+<li *ngIf="!isLoggedIn && !isMobile" class="nav-item active">
+  <button
+    class="nav-link btn btn-info"
+    [routerLink]="['/signin']"
+    style="color: white; width: 5vw;"
+  >
+    Log In
+  </button>
 </li>
 <li *ngIf="isLoggedIn && !isMobile" class="nav-item dropdown bardesign">
-    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-    Hi, {{name}}
-   </a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+  <a
+    class="nav-link dropdown-toggle active"
+    href="#"
+    id="navbarDropdown"
+    role="button"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+    style="color: white;"
+  >
+    Hi, {{ name }}
+  </a>
+  <div
+    class="dropdown-menu dropdown-menu-right"
+    aria-labelledby="navbarDropdown"
+  >
+    <a class="dropdown-item" [routerLink]="['/signin']">Create a Bug </a>
 
-        <a class="dropdown-item" href="#">My Profile</a>
-        <a class="dropdown-item" href="#">My Bookings</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" (click)="logout()">Log out</a>
-    </div>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" (click)="logout()">Log out</a>
+  </div>
 </li>
 
-
-<li *ngIf="!isLoggedIn && isMobile" class="nav-item active ">
-    <a class="nav-link " [routerLink]="[ '/signin'] " style="color: white;">Log In</a>
+<li *ngIf="!isLoggedIn && isMobile" class="nav-item active">
+  <a class="nav-link" [routerLink]="['/signin']" style="color: white;"
+    >Log In</a
+  >
 </li>
 <li *ngIf="isLoggedIn && isMobile" class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
- Hi, {{name}}
-</a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-        <a class="dropdown-item" href="#">My Profile</a>
-        <a class="dropdown-item" href="#">My Bookings</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" (click)="logout()">Log out</a>
-    </div>
+  <a
+    class="nav-link dropdown-toggle active"
+    href="#"
+    id="navbarDropdown"
+    role="button"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+    style="color: white;"
+  >
+    Hi, {{ name }}
+  </a>
+  <div
+    class="dropdown-menu dropdown-menu-right"
+    aria-labelledby="navbarDropdown"
+  >
+  <a class="dropdown-item" [routerLink]="['/signin']">Create a Bug </a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" (click)="logout()">Log out</a>
+  </div>
 </li>

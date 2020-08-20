@@ -29,7 +29,7 @@ export class LogoutComponent implements OnInit {
       if (response) {
         console.log('res bis ' + JSON.stringify(response));
         localStorage.clear();
-        this.router.navigate(['/signin']);
+        this.router.navigate(['/home']);
         this.isLoggedIn = false;
       }
     });

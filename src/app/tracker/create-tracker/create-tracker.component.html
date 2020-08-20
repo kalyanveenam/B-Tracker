@@ -92,9 +92,8 @@
                         <label id="labelForFolder" class="custom-file-label" for="inputGroupFile01">Upload attachment</label>
                     </div>
                 </div>
-                <div *ngIf="isUploaded">
-                    <a *ngFor="let file of attachmentFiles" href="{{file.path}}">{{file.name}} <br/></a> <br /></div>
-                <button type="submit" class="btn btn-dark">Upload</button>
+    
+                    <a *ngFor="let file of attachmentFiles" href="{{file.path}}">{{file.name}} <br/></a> <br />
          
             </div>
             <label for="comment">Priority:</label>

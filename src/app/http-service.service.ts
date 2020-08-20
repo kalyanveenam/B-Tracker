@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class HttpServiceService {
-  public baseUrl = 'https://btracker-backend.herokuapp.com/api/v1';
+  public baseUrl = 'http://localhost:3001/api/v1';
   fileToUpload: File = null;
 
   constructor(public _http: HttpClient, public toastr: ToastrService) {
@@ -22,7 +22,7 @@ export class HttpServiceService {
   public signin(username, password) {
     return this._http.post(
       this.baseUrl + '/user/login',
-  { email: username, password: password },
+      { email: username, password: password },
       { headers: { 'Content-Type': 'application/json' } }
     );
   }
@@ -216,5 +216,24 @@ export class HttpServiceService {
     const formData: FormData = new FormData();
     formData.append('attachment', fileToUpload, fileToUpload.name);
     return this._http.post(endpoint, formData);
+  }
+
+  public storeAttachment(bugId, name) {
+    var header = {};
+    header['Authorization'] = localStorage.getItem('token');
+    header['Content-Type'] = 'application/json';
+    return this._http.post(
+      this.baseUrl +
+        '/upload/attachment?bugId=' +
+        bugId +
+        '&userId=' +
+        localStorage.getItem('userId'),
+        JSON.stringify({
+          name: name
+        }),
+      {
+        headers: header,
+      }
+    );
   }
 }

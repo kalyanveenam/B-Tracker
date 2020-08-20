@@ -1,11 +1,11 @@
 .btn-color {
-  background-color: rgb(209, 209, 243) !important;
-  color: black;
-}
-.btn-color:hover {
   background-color: #343a40 !important;
   color: white;
 }
+/* .btn-color:hover {
+  background-color: #343a40 !important;
+  color: white;
+} */
 .searchandbuttons{
   margin-top: 15vh;
 }
@@ -21,4 +21,8 @@ color: rgb(2, 2, 112);
 .btn-change {
   color: Red;
   background-color: white;
+}
+.btn-remove{
+  background-color: #b3d1f0 !important;
+  color: rgb(0, 0, 0);
 }

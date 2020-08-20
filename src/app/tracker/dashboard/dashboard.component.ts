@@ -26,6 +26,9 @@ export class DashboardComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {}
   public trackers;
+  public headers = [];
+  public rows = [];
+
   public isAssignee: boolean = true;
   public isReporter: boolean = false;
   public assignees;
@@ -33,8 +36,12 @@ export class DashboardComponent implements OnInit {
   public watchedIssues;
   p: number = 1;
   public btnstyle;
+  isReportedClicked: boolean = true;
+  isAssigneeClicked: boolean = false;
+  isWatchedClicked: boolean = false;
+  isCreateClicked: boolean = false;
   ngOnInit(): void {
-   
+   this.bugdReportedByUser()
     this.btnstyle = 'btn-default';
   }
   changestyle() {
@@ -56,6 +63,11 @@ export class DashboardComponent implements OnInit {
   getBugsByAssignee() {
     this.isAssignee = false;
     this.isReporter = true;
+    this.isAssigneeClicked = true;
+    this.isCreateClicked = false;
+    this.isWatchedClicked = false;
+    this.isReportedClicked = false;
+
     this.spinner.show();
 
     this.Http.getTrackersByAssignee(localStorage.getItem('username')).subscribe(
@@ -76,11 +88,20 @@ export class DashboardComponent implements OnInit {
     });
   }
   bugdReportedByUser() {
+   
     this.isAssignee = true;
     this.isReporter = false;
+    this.isReportedClicked = true;
+    this.isAssigneeClicked = false;
+    this.isCreateClicked = false;
+    this.isWatchedClicked = false;
     this.getBugs();
   }
   public bugsByUserId() {
+    this.isWatchedClicked = true;
+    this.isReportedClicked = false;
+    this.isAssigneeClicked = false;
+    this.isCreateClicked = false;
     this.Http.getWatchedBugsByUserId(localStorage.getItem('userId')).subscribe(
       (response) => {
         console.log(response['data'])

@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { NgxPaginationModule} from 'ngx-pagination';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -18,6 +19,6 @@ import { NgxPaginationModule} from 'ngx-pagination';
     CreateTrackerComponent,
     ViewTrackerComponent,
   ],
-  imports: [CommonModule, SharedModule, AppRoutingModule, FormsModule,NgxSpinnerModule,Ng2SearchPipeModule,NgxPaginationModule],
+  imports: [Ng2OrderModule,CommonModule, SharedModule, AppRoutingModule, FormsModule,NgxSpinnerModule,Ng2SearchPipeModule,NgxPaginationModule],
 })
 export class TrackerModule {}

@@ -5,14 +5,11 @@
     <input
       type="text"
       class="form-control"
-      placeholder="Search with any Keyword"
+      placeholder="Search with any trackers"
       aria-label="Recipient's username"
       aria-describedby="basic-addon2"
       [(ngModel)]="term"
     />
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button">Search</button>
-    </div>
   </div>
 
   <div
@@ -22,8 +19,11 @@
   >
     <button
       type="button"
-      class="btn btn-secondary btn-color pl-3"
-   
+      class="btn btn-secondary pl-3"
+      [ngClass]="{
+        'btn-color': isReportedClicked,
+        'btn-remove': !isReportedClicked
+      }"
       data-toggle="tooltip"
       data-html="true"
       title="Click to sort with issues Assigned to you"
@@ -33,26 +33,34 @@
     </button>
     <button
       type="button"
-      class="btn btn-secondary btn-color pl-3"
-
+      class="btn btn-secondary pl-3"
+      [ngClass]="{
+        'btn-color': isAssigneeClicked,
+        'btn-remove': !isAssigneeClicked
+      }"
       (click)="getBugsByAssignee()"
     >
-      Assigned to me 
+      Assigned to me
     </button>
     <button
       type="button"
-      class="btn btn-secondary btn-color pl-3"
+      class="btn btn-secondary pl-3"
+      [ngClass]="{
+        'btn-color': isWatchedClicked,
+        'btn-remove': !isWatchedClicked
+      }"
       (click)="bugsByUserId()"
     >
       Starred issues
     </button>
     <button
       type="button"
-      class="btn btn-secondary btn-color pl-3"
-   
+      class="btn btn-secondary pl-3"
+      [ngClass]="{
+        'btn-color': isCreateClicked,
+        'btn-remove': !isCreateClicked
+      }"
       [routerLink]="['/createTracker']"
-
-
     >
       Create
     </button>
@@ -68,13 +76,19 @@
         <th scope="col">Status</th>
         <th scope="col">Priority</th>
         <th scope="col" *ngIf="isAssignee">Assignee</th>
-       <th scope="col" *ngIf="isReporter">Reporter</th>
+        <th scope="col" *ngIf="isReporter">Reporter</th>
         <th scope="col">Created Date</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let bug of trackers|filter:term | paginate:{itemsPerPage:10,currentPage: p};">
+      <tr
+        *ngFor="
+          let bug of trackers
+            | filter: term
+            | paginate: { itemsPerPage: 10, currentPage: p }
+        "
+      >
         <td scope="row">
           <a class="link-view" (click)="sendId(bug._id)"
             ><u> {{ bug.title }}</u></a
@@ -93,3 +107,4 @@
 </div>
 <pagination-controls (pageChange)="p = $event"></pagination-controls>
 <app-footer></app-footer>
+<ngx-spinner></ngx-spinner>

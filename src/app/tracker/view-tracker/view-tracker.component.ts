@@ -24,12 +24,13 @@ export class ViewTrackerComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {}
   public bugData;
+  public fileName;
   public watchedIssues;
   buttonDisabled: Boolean = true;
   public bugId;
   fileToUpload: File = null;
   files: FileList;
-
+  public attachmentFiles = [];
   public priorities = [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }];
   public statusList = [
     { name: 'open' },
@@ -41,7 +42,7 @@ export class ViewTrackerComponent implements OnInit {
   ];
   public assignees;
   public allComments;
-  public imageData = [];
+  public attachments = [];
   changeStatus() {
     this.buttonDisabled = false;
   }
@@ -49,7 +50,6 @@ export class ViewTrackerComponent implements OnInit {
     this.viewID();
     this.getAllUsers();
     this.getAttachments();
-    this.bugsByUserId()
   }
   public getAllUsers() {
     this.Http.getAllUsers().subscribe((response) => {
@@ -94,6 +94,11 @@ export class ViewTrackerComponent implements OnInit {
         localStorage.setItem('currentId', response['data']['_id']);
         this.toastr.success('Updated tracker successfully');
         this.router.navigate(['/dashboard']);
+        console.log(data.attachment);
+        this.Http.storeAttachment(
+          response['data']['_id'],
+          data.attachment
+        ).subscribe((response) => {});
       },
       (error) => {
         this.toastr.error(
@@ -128,36 +133,40 @@ export class ViewTrackerComponent implements OnInit {
       this.Http.getAttachmentsByBugId(
         localStorage.getItem('currentId')
       ).subscribe((response) => {
-        // console.log('hi' +  response['data'][0]['attachments']['data']);
-        let count = Object.keys(response['data']).length;
-        console.log('ct ::' + count);
-        for (let i = 0; i < count; i++) {
-          let bufferAttach = response['data'][i]['attachments']['data'];
+        this.fileName = response['data'];
+        console.log(this.fileName);
+        for (var i in response['data']) {
+          var attachment = {};
+          var name = response['data'][i]['attachment'].toString();
 
-          let TYPED_ARRAY = new Uint8Array(bufferAttach);
-          const STRING_CHAR = TYPED_ARRAY.reduce((data, byte) => {
-            return data + String.fromCharCode(byte);
-          }, '');
-
-          let base64String = btoa(STRING_CHAR);
-          //  console.log(base64String);
-          let imageurl = this.domSanitizer.bypassSecurityTrustUrl(
-            'data:image/jpg;base64,' + base64String
-          );
-          this.imageData.push(
-            imageurl['changingThisBreaksApplicationSecurity']
-          );
-          console.log('this data:' + JSON.stringify(this.imageData));
+          attachment['name'] = name.split('\\').pop();
+          attachment['path'] =
+            'http://localhost:3001/files/' + attachment['name'];
+          this.attachments.push(attachment);
         }
       });
     }, 3000);
+  }
+  public addFile(event) {
+    var attachment = {};
+    this.fileToUpload = event.target.files.item(0);
+    attachment['name'] = event.target.files[0].name;
+    this.Http.postFile(this.fileToUpload).subscribe((res) => {
+      console.log('res is ' + res);
+      attachment['path'] = 'http://localhost:3001/files/' + attachment['name'];
+      this.attachmentFiles.push(attachment);
+      console.log(JSON.stringify(this.attachmentFiles));
+    }),
+      (err) => {
+        console.log('err ' + err);
+      };
   }
   public createAttachments(files: FileList) {
     console.log(files);
     this.Http.postMethod(files);
   }
   public bugsByUserId() {
-    this.Http.getWatchedUsersByBugId(localStorage.getItem('currentId')).subscribe(
+    this.Http.getWatchedUsersByBugId(localStorage.getItem('userId')).subscribe(
       (response) => {
         this.watchedIssues = response['data'];
         console.log(response['data']);
