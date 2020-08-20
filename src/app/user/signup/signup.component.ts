@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
             this.toastr.error('Missing mandatory fields! Please try again');
           } else {
             this.httpService.sendEmail(
-              response['data']['userDetails']['email'],
+              response['data']['email'],
               'Welcome to BTracker',
               'Please sign in to continue!'
             );

@@ -30,7 +30,7 @@ export class CreateTrackerComponent implements OnInit {
     this.fileToUpload = event.target.files.item(0);
     attachment['name'] = event.target.files[0].name;
     this.Http.postFile(this.fileToUpload).subscribe((res) => {
-      attachment['path'] = 'http://localhost:3001/files/' + attachment['name'];
+      attachment['path'] = 'https://dashboard.heroku.com/apps/btracker-backend' + attachment['name'];
       this.attachmentFiles.push(attachment);
     }),
       (err) => {};
