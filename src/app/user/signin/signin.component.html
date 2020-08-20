@@ -4,7 +4,6 @@
     <div class="fadeIn first">
       <img src="../../../assets/login-icon.png" id="icon" alt="User Icon" />
     </div>
-
     <form
       #loginForm="ngForm"
       (ngSubmit)="onSubmit(loginForm.value)"
@@ -21,6 +20,7 @@
         ng-required
       />
       <input
+        *ngIf="notFp"
         type="password"
         id="login"
         class="fadeIn third"
@@ -29,16 +29,26 @@
         placeholder="Enter Password"
         ng-required
       />
-      <input type="submit" class="fadeIn fourth" value="Log In" />
+      <input *ngIf="notFp" type="submit" class="fadeIn fourth" value="Log In" />
+      <div *ngIf="!notFp">
+        <br />
+        <input type="submit" class="btn btn-info" value="Reset Password" />
+        <br /><br />
+      </div>
     </form>
-    <div id="formFooter">
+    <div id="formFooter" *ngIf="notFp">
       <a class="underlineHover" [routerLink]="['/signup']"
         >click here to <b class="signup">Signup</b></a
       >
     </div>
 
-    <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
+    <div id="formFooter" *ngIf="notFp">
+      <a class="underlineHover" (click)="forgotPasswordOnClick()"
+        >Forgot Password?</a
+      >
+    </div>
+    <div id="formFooter" *ngIf="!notFp">
+      <a class="underlineHover" (click)="revertFpOnClick()">Login</a>
     </div>
   </div>
 </div>

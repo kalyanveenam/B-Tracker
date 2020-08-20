@@ -30,25 +30,18 @@ export class CreateTrackerComponent implements OnInit {
     this.fileToUpload = event.target.files.item(0);
     attachment['name'] = event.target.files[0].name;
     this.Http.postFile(this.fileToUpload).subscribe((res) => {
-      console.log('res is ' + res);
-      attachment['path'] =
-        'https://btracker-backend.herokuapp.com/files/' + attachment['name'];
+      attachment['path'] = 'http://localhost:3001/files/' + attachment['name'];
       this.attachmentFiles.push(attachment);
-      console.log(JSON.stringify(this.attachmentFiles));
     }),
-      (err) => {
-        console.log('err ' + err);
-      };
+      (err) => {};
   }
   public getAllUsers() {
     this.Http.getAllUsers().subscribe((response) => {
-      console.log(response);
       this.assignees = response;
     });
   }
 
   public onSubmit(data) {
-    console.log('name' + data.attachment);
     this.Http.createTracker(
       data.title,
       data.description,
@@ -56,7 +49,6 @@ export class CreateTrackerComponent implements OnInit {
       data.assignee
     ).subscribe(
       (response) => {
-        console.log(response);
         if (response) {
           this.toastr.success(
             'Bug is created sucessfully',
@@ -64,21 +56,21 @@ export class CreateTrackerComponent implements OnInit {
           );
           this.router.navigate(['dashboard']);
         }
-        console.log('test this:' + response['data']['_id']);
-        console.log();
+
         this.Http.storeAttachment(
           response['data']['_id'],
           data.attachment
         ).subscribe((response) => {
-          console.log(response);
+          this.Http.sendEmail(
+            localStorage.getItem('email'),
+            'You have created a tracker',
+            'Check it out!'
+          );
         });
       },
       (error) => {
-        console.log(error);
         this.toastr.error('Unable to create a bug');
       }
     );
-
-    console.log(data);
   }
 }

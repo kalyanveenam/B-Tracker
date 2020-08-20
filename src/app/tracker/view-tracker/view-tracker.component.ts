@@ -22,7 +22,11 @@ export class ViewTrackerComponent implements OnInit {
     public router: Router,
     public domSanitizer: DomSanitizer,
     private spinner: NgxSpinnerService
-  ) {}
+  ) {
+
+    this.bugsByUserId();
+
+  }
   public bugData;
   public fileName;
   public watchedIssues;
@@ -43,6 +47,7 @@ export class ViewTrackerComponent implements OnInit {
   public assignees;
   public allComments;
   public attachments = [];
+  isWatched:boolean= false;
   changeStatus() {
     this.buttonDisabled = false;
   }
@@ -53,14 +58,14 @@ export class ViewTrackerComponent implements OnInit {
   }
   public getAllUsers() {
     this.Http.getAllUsers().subscribe((response) => {
-      console.log(response);
+     
       this.assignees = response;
     });
   }
 
   public viewID() {
     this.route.params.subscribe((params) => {
-      console.log(params);
+     
       this.Http.getTrackerById(params['id']).subscribe(
         (response) => {
           localStorage.setItem('status', response['data']['status']);
@@ -73,7 +78,7 @@ export class ViewTrackerComponent implements OnInit {
           this.bugData = response['data'];
         },
         (error) => {
-          console.log(error);
+         
         }
       );
     });
@@ -81,11 +86,11 @@ export class ViewTrackerComponent implements OnInit {
 
   public updateBug(data) {
     this.spinner.show();
-    console.log(data);
+  
     this.Http.updateTracker(localStorage.getItem('currentId'), data).subscribe(
       (response) => {
         this.spinner.hide();
-        console.log(response);
+      
         localStorage.setItem('status', response['data']['status']);
         localStorage.setItem('title', response['data']['title']);
         localStorage.setItem('discription', response['data']['description']);
@@ -94,7 +99,7 @@ export class ViewTrackerComponent implements OnInit {
         localStorage.setItem('currentId', response['data']['_id']);
         this.toastr.success('Updated tracker successfully');
         this.router.navigate(['/dashboard']);
-        console.log(data.attachment);
+     
         this.Http.storeAttachment(
           response['data']['_id'],
           data.attachment
@@ -113,7 +118,7 @@ export class ViewTrackerComponent implements OnInit {
     this.Http.getCommentsByBugId(localStorage.getItem('currentId')).subscribe(
       (response) => {
         this.spinner.hide();
-        console.log(response);
+       
         this.allComments = response['data'];
       },
       (error) => {
@@ -134,7 +139,6 @@ export class ViewTrackerComponent implements OnInit {
         localStorage.getItem('currentId')
       ).subscribe((response) => {
         this.fileName = response['data'];
-        console.log(this.fileName);
         for (var i in response['data']) {
           var attachment = {};
           var name = response['data'][i]['attachment'].toString();
@@ -153,29 +157,36 @@ export class ViewTrackerComponent implements OnInit {
     this.fileToUpload = event.target.files.item(0);
     attachment['name'] = event.target.files[0].name;
     this.Http.postFile(this.fileToUpload).subscribe((res) => {
-      console.log('res is ' + res);
+      
       attachment['path'] =
         'https://btracker-backend.herokuapp.com/files/' + attachment['name'];
       this.attachmentFiles.push(attachment);
-      console.log(JSON.stringify(this.attachmentFiles));
+     
     }),
       (err) => {
-        console.log('err ' + err);
+     
       };
   }
   public createAttachments(files: FileList) {
-    console.log(files);
+   
     this.Http.postMethod(files);
   }
   public bugsByUserId() {
-    this.Http.getWatchedUsersByBugId(localStorage.getItem('userId')).subscribe(
+    this.Http.getWatchedBugsByUserId(localStorage.getItem('userId')).subscribe(
       (response) => {
         this.watchedIssues = response['data'];
-        console.log(response['data']);
+         for (var i in response['data']) {
+             if (localStorage.getItem('title') == response['data'][i]['title']) {
+            this.isWatched = true;
+             break;
+          }
+        }
       }
     );
+
   }
   public watchIssue() {
+    this.isWatched = true;
     this.Http.addToWatchlist(
       localStorage.getItem('userId'),
       localStorage.getItem('currentId'),

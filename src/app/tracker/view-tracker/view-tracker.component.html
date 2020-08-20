@@ -36,8 +36,11 @@
       <ul class="dropdown-menu" *ngFor="let watchers of watchedIssues">
         <li>{{watchers.username}}</li>
     
-        <li><button type="button" class="btn btn-primary" (click)="watchIssue()" >watch</button></li>
+       
       </ul>
+      <button type="button" class="btn btn-primary" *ngIf="isWatched" [disabled]="buttonDisabled" (click)="watchIssue()" >Watching</button>
+      <button type="button" class="btn btn-primary" *ngIf="!isWatched"  (click)="watchIssue()" >watch</button>
+      
     </div>
     </div>
   </div>

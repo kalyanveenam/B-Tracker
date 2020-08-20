@@ -15,19 +15,19 @@ export class LogoutComponent implements OnInit {
     this.isLoggedIn = localStorage.getItem('isLoggedin') == 'true';
     this.name = localStorage.getItem('username');
     this.isMobile = this.isMobile == 'true';
-    console.log('con ' + this.isLoggedIn);
+   
   }
   ngOnInit() {
     this.isLoggedIn = localStorage.getItem('isLoggedin') == 'true';
     this.name = localStorage.getItem('username');
     this.isMobile = this.isMobile == 'true';
-    console.log('cons ' + this.isLoggedIn);
+    
   }
 
   logout() {
     this.httpConnect.logout().subscribe((response) => {
       if (response) {
-        console.log('res bis ' + JSON.stringify(response));
+ 
         localStorage.clear();
         this.router.navigate(['/home']);
         this.isLoggedIn = false;

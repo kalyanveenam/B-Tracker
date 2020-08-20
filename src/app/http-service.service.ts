@@ -15,9 +15,7 @@ export class HttpServiceService {
   public baseUrl = 'https://btracker-backend.herokuapp.com/api/v1';
   fileToUpload: File = null;
 
-  constructor(public _http: HttpClient, public toastr: ToastrService) {
-    console.log('HTTP service constructor is called');
-  }
+  constructor(public _http: HttpClient, public toastr: ToastrService) {}
 
   public signin(username, password) {
     return this._http.post(
@@ -40,7 +38,6 @@ export class HttpServiceService {
   }
 
   public getTrackers() {
-    console.log(localStorage.getItem('token'));
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
     return this._http.get(this.baseUrl + '/bugs', { headers: header });
@@ -64,10 +61,9 @@ export class HttpServiceService {
   }
 
   public getTrackerById(id) {
-    console.log(localStorage.getItem('token'));
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
-    console.log(this.baseUrl + '/bugs/' + id);
+
     return this._http.get(this.baseUrl + '/bugs/' + id, { headers: header });
   }
   public updateTracker(id, data) {
@@ -87,7 +83,7 @@ export class HttpServiceService {
   public getTrackersByAssignee(assignee) {
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
-    console.log(this.baseUrl + '/bugs/sort/assignee');
+
     return this._http.post(
       this.baseUrl + '/bugs/sort/assignee',
       {
@@ -98,10 +94,9 @@ export class HttpServiceService {
   }
 
   public getCommentsByBugId(bugid) {
-    console.log(localStorage.getItem('token'));
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
-    console.log(this.baseUrl + '/bugs/comments/all?id=' + bugid);
+
     return this._http.get(this.baseUrl + '/bugs/comments/all?id=' + bugid, {
       headers: header,
     });
@@ -121,10 +116,9 @@ export class HttpServiceService {
     );
   }
   public getAttachmentsByBugId(bugid) {
-    console.log(localStorage.getItem('token'));
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
-    console.log(this.baseUrl + '/get/attachments?id=' + bugid);
+
     return this._http.get(this.baseUrl + '/get/attachments?id=' + bugid, {
       headers: header,
     });
@@ -141,9 +135,7 @@ export class HttpServiceService {
           localStorage.getItem('currentId'),
         formData
       )
-      .subscribe((val) => {
-        console.log(val);
-      });
+      .subscribe((val) => {});
   }
   public addToWatchlist(
     userid,
@@ -155,10 +147,9 @@ export class HttpServiceService {
     description,
     assignee
   ) {
-    console.log(localStorage.getItem('token'));
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
-    console.log(this.baseUrl + '/add/watcher?id=' + bugid);
+
     return this._http.post(
       this.baseUrl + '/add/watcher?userId=' + userid + '&bugId=' + bugid,
       {
@@ -178,7 +169,7 @@ export class HttpServiceService {
     var header = {};
     header['Authorization'] = localStorage.getItem('token');
     header['Content-Type'] = 'application/json';
-    console.log(this.baseUrl + '/get/bugsByUserId?id=' + userId);
+
     return this._http.get(
       this.baseUrl + '/get/bugsByUserId?id=' + userId,
 
@@ -235,5 +226,18 @@ export class HttpServiceService {
         headers: header,
       }
     );
+  }
+
+  public forgotPassword(email) {
+    const endpoint = this.baseUrl + '/forgotPassword';
+    return this._http.post(endpoint, { email: email });
+  }
+  public sendEmail(to, subject, text) {
+    var req_body = {};
+    req_body['to'] = to;
+    req_body['subject'] = subject;
+    req_body['text'] = text;
+    const endpoint = this.baseUrl + '/email';
+    return this._http.post(endpoint, req_body);
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../../http-service.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -16,9 +16,7 @@ export class SignupComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit(): void {
-   
-  }
+  ngOnInit(): void {}
   onSubmit(signupdata) {
     this.spinner.show();
     this.httpService
@@ -31,27 +29,27 @@ export class SignupComponent implements OnInit {
       .subscribe(
         (response) => {
           this.spinner.hide();
-          console.log(response);
+
           if (response['error'] == true) {
             this.toastr.error('Missing mandatory fields! Please try again');
           } else {
-            console.log(response);
-            this.toastr.success(
-              'Signup Sucessful!'
+            this.httpService.sendEmail(
+              response['data']['userDetails']['email'],
+              'Welcome to BTracker',
+              'Please sign in to continue!'
             );
+            this.toastr.success('Signup Sucessful!');
             this.router.navigate(['signin']);
           }
         },
         (error) => {
           this.spinner.hide();
-          console.log(error);
+
           this.toastr.error(
             error,
             'Missing mandatory fields! Please try again'
           );
         }
       );
-
-    console.log(signupdata);
   }
 }

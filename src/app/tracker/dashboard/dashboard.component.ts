@@ -73,17 +73,17 @@ export class DashboardComponent implements OnInit {
     this.Http.getTrackersByAssignee(localStorage.getItem('username')).subscribe(
       (response) => {
         this.spinner.hide();
-        console.log(response);
+        
         this.trackers = response['data'];
       }
     );
   }
   getAttaachmentsById() {
-    console.log(localStorage.getItem('currentId'));
+  
     this.Http.getAttachmentsByBugId(
       localStorage.getItem('currentId')
     ).subscribe((response) => {
-      console.log(response);
+    
       // this.trackers = response['data'];
     });
   }
@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
     this.isCreateClicked = false;
     this.Http.getWatchedBugsByUserId(localStorage.getItem('userId')).subscribe(
       (response) => {
-        console.log(response['data'])
+      
         this.trackers = response['data'];
        
       }

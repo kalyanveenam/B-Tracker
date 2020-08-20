@@ -11,15 +11,15 @@ export class NavbarComponent implements OnInit {
   isLoggedin: boolean = localStorage.getItem('isLoggedin') == 'true';
 
   constructor(public http: HttpServiceService, public router: Router) {
-    console.log('ngoned int');
+   
   }
   ngOnInit(): void {
-    console.log('ngone int');
+  
   }
   logout() {
     this.http.logout().subscribe((Response) => {
       localStorage.clear();
-      console.log(Response);
+     
     });
   }
 }
