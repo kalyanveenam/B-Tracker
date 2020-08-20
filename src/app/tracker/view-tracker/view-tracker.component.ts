@@ -153,7 +153,7 @@ export class ViewTrackerComponent implements OnInit {
     attachment['name'] = event.target.files[0].name;
     this.Http.postFile(this.fileToUpload).subscribe((res) => {
       console.log('res is ' + res);
-      attachment['path'] = 'http://localhost:3001/files/' + attachment['name'];
+      attachment['path'] = 'https://btracker-backend.herokuapp.com/files/' + attachment['name'];
       this.attachmentFiles.push(attachment);
       console.log(JSON.stringify(this.attachmentFiles));
     }),
