@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit {
   isAssigneeClicked: boolean = false;
   isWatchedClicked: boolean = false;
   isCreateClicked: boolean = false;
+  isWatchedIssues: boolean = false;
   ngOnInit(): void {
    this.bugdReportedByUser()
     this.btnstyle = 'btn-default';
@@ -53,11 +54,13 @@ export class DashboardComponent implements OnInit {
     this.Http.getTrackers().subscribe((response) => {
     
       this.trackers = response['data'];
+  
       this.spinner.hide();
     });
   }
   sendId(data) {
-    localStorage.setItem('currentId', data._id);
+    console.log(data)
+    localStorage.setItem('currentId', data);
     this.router.navigate(['viewTracker', data]);
   }
   getBugsByAssignee() {
@@ -67,13 +70,13 @@ export class DashboardComponent implements OnInit {
     this.isCreateClicked = false;
     this.isWatchedClicked = false;
     this.isReportedClicked = false;
-
+    this.isWatchedIssues = false;
     this.spinner.show();
 
     this.Http.getTrackersByAssignee(localStorage.getItem('username')).subscribe(
       (response) => {
         this.spinner.hide();
-        
+        console.log(response['data'])
         this.trackers = response['data'];
       }
     );
@@ -95,6 +98,7 @@ export class DashboardComponent implements OnInit {
     this.isAssigneeClicked = false;
     this.isCreateClicked = false;
     this.isWatchedClicked = false;
+    this.isWatchedIssues = false;
     this.getBugs();
   }
   public bugsByUserId() {
@@ -102,12 +106,18 @@ export class DashboardComponent implements OnInit {
     this.isReportedClicked = false;
     this.isAssigneeClicked = false;
     this.isCreateClicked = false;
+    this.isWatchedIssues = true;
+    
     this.Http.getWatchedBugsByUserId(localStorage.getItem('userId')).subscribe(
       (response) => {
-      
+        this.isAssignee = true;
+      console.log(response)
         this.trackers = response['data'];
        
       }
     );
+  }
+  public removeFromWatchList(data) { 
+    console.log('delete'+data)
   }
 }

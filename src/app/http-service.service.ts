@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class HttpServiceService {
-  public baseUrl = 'https://btracker-backend.herokuapp.com/api/v1';
+  public baseUrl = 'http://localhost:3001/api/v1';
   fileToUpload: File = null;
 
   constructor(public _http: HttpClient, public toastr: ToastrService) {}

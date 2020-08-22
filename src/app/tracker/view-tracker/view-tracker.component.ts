@@ -24,8 +24,7 @@ export class ViewTrackerComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {
 
-    this.bugsByUserId();
-
+  
   }
   public bugData;
   public fileName;
@@ -47,11 +46,16 @@ export class ViewTrackerComponent implements OnInit {
   public assignees;
   public allComments;
   public attachments = [];
+  public getBugData=[];
+  public data = {};
   isWatched:boolean= false;
   changeStatus() {
     this.buttonDisabled = false;
+    
   }
   ngOnInit(): void {
+    
+    this.usersByBugId();
     this.viewID();
     this.getAllUsers();
     this.getAttachments();
@@ -65,15 +69,17 @@ export class ViewTrackerComponent implements OnInit {
 
   public viewID() {
     this.route.params.subscribe((params) => {
-     
+      this.data = {};
       this.Http.getTrackerById(params['id']).subscribe(
         (response) => {
-          localStorage.setItem('status', response['data']['status']);
-          localStorage.setItem('title', response['data']['title']);
-          localStorage.setItem('discription', response['data']['description']);
-          localStorage.setItem('priority', response['data']['priority']);
-          localStorage.setItem('assignee', response['data']['assignee']);
-          localStorage.setItem('currentId', response['data']['_id']);
+          this.data['status'] = response['data']['status'];
+          this.data['title'] = response['data']['title'];
+          this.data['discription'] = response['data']['description'];
+          this.data['priority'] = response['data']['priority'];
+          this.data['assignee'] = response['data']['assignee'];
+          this.data['currentId'] = response['data']['_id'];
+          this.getBugData.push(this.data);
+       
 
           this.bugData = response['data'];
         },
@@ -86,17 +92,20 @@ export class ViewTrackerComponent implements OnInit {
 
   public updateBug(data) {
     this.spinner.show();
-  
+    this.data = {};
     this.Http.updateTracker(localStorage.getItem('currentId'), data).subscribe(
       (response) => {
         this.spinner.hide();
-      
-        localStorage.setItem('status', response['data']['status']);
-        localStorage.setItem('title', response['data']['title']);
-        localStorage.setItem('discription', response['data']['description']);
-        localStorage.setItem('priority', response['data']['priority']);
-        localStorage.setItem('assignee', response['data']['assignee']);
-        localStorage.setItem('currentId', response['data']['_id']);
+        this.data['status'] = response['data']['status'];
+        this.data['title'] = response['data']['title'];
+        this.data['discription'] = response['data']['description'];
+        this.data['priority'] = response['data']['priority'];
+        this.data['assignee'] = response['data']['assignee'];
+        this.data['currentId'] = response['data']['_id'];
+        this.getBugData = [];
+        this.getBugData.push(data)
+         console.log(this.getBugData[0]['status'])
+     
         this.toastr.success('Updated tracker successfully');
         this.router.navigate(['/dashboard']);
      
@@ -171,12 +180,15 @@ export class ViewTrackerComponent implements OnInit {
    
     this.Http.postMethod(files);
   }
-  public bugsByUserId() {
-    this.Http.getWatchedBugsByUserId(localStorage.getItem('userId')).subscribe(
+  public usersByBugId() {
+    this.Http.getWatchedUsersByBugId(localStorage.getItem('currentId')).subscribe(
       (response) => {
+        console.log(response['data'])
         this.watchedIssues = response['data'];
+        console.log('current id:' +JSON.stringify( response['data'][0]))
+        console.log('bugData stored:'+JSON.stringify(this.getBugData[0]))
          for (var i in response['data']) {
-             if (localStorage.getItem('title') == response['data'][i]['title']) {
+             if (this.getBugData[0]['title'] == response['data'][i]['title']) {
             this.isWatched = true;
              break;
           }
@@ -187,17 +199,19 @@ export class ViewTrackerComponent implements OnInit {
   }
   public watchIssue() {
     this.isWatched = true;
+      console.log(this.getBugData[0]['status'])
     this.Http.addToWatchlist(
       localStorage.getItem('userId'),
       localStorage.getItem('currentId'),
       localStorage.getItem('username'),
-      localStorage.getItem('status'),
-      localStorage.getItem('title'),
-      localStorage.getItem('priority'),
-      localStorage.getItem('discription'),
-      localStorage.getItem('assignee')
+      this.getBugData[0]['status'],
+      this.getBugData[0]['title'],
+       this.getBugData[0]['priority'],
+      this.getBugData[0]['discription'],
+      this.getBugData[0]['assignee']
     ).subscribe((response) => {
-      this.bugsByUserId();
+      console.log(response)
+      this.usersByBugId();
     });
   }
 }

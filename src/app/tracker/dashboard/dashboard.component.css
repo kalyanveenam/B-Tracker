@@ -26,3 +26,11 @@ color: rgb(2, 2, 112);
   background-color: #b3d1f0 !important;
   color: rgb(0, 0, 0);
 }
+.title-watched{
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+.remove-watchlist{
+  margin-top: 4vh;
+  color: rgb(212, 2, 2);
+}

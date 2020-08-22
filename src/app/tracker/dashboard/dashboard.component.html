@@ -51,7 +51,7 @@
       }"
       (click)="bugsByUserId()"
     >
-      Starred issues
+      Watched issues
     </button>
     <button
       type="button"
@@ -76,8 +76,8 @@
         <th scope="col">Status</th>
         <th scope="col">Priority</th>
         <th scope="col" *ngIf="isAssignee">Assignee</th>
-        <th scope="col" *ngIf="isReporter">Reporter</th>
-        <th scope="col">Created Date</th>
+        <th scope="col" *ngIf="!isAssignee " >Reporter</th>
+        <th scope="col" *ngIf="!isWatchedIssues">Created Date</th>
       </tr>
     </thead>
 
@@ -90,17 +90,22 @@
         "
       >
         <td scope="row">
-          <a class="link-view" (click)="sendId(bug._id)"
+          <a
+            *ngIf="!isWatchedIssues"
+            class="link-view"
+            (click)="sendId(bug._id)"
             ><u> {{ bug.title }}</u></a
           >
+          <u *ngIf="isWatchedIssues" class="title-watched">{{ bug.title }}</u>
         </td>
         <td>
           {{ bug.description }}
         </td>
         <td>{{ bug.status }}</td>
         <td>{{ bug.priority }}</td>
-        <td>{{ bug.assignee }}</td>
-        <td>{{ bug.createdDate }}</td>
+        <td  *ngIf="isAssignee">{{ bug.assignee }}</td>
+        <td *ngIf="!isAssignee" >{{ bug.reporter }}</td>
+        <td *ngIf="!isWatchedIssues">{{ bug.createdDate }}</td>
       </tr>
     </tbody>
   </table>

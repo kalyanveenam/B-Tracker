@@ -15,7 +15,8 @@ export class SigninComponent implements OnInit {
     public router: Router,
     public toastr: ToastrService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
+  public email;
   forgotPasswordOnClick = () => {
     this.notFp = false;
   };
