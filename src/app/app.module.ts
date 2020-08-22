@@ -31,6 +31,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ToastrModule.forRoot({ positionClass: 'toast-top-right' }),
     ToastContainerModule,
     NgxSpinnerModule,
+FormsModule,
     Ng2SearchPipeModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

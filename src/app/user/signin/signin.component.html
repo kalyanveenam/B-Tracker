@@ -1,44 +1,32 @@
 <app-navbar></app-navbar>
 <div class="wrapper fadeInDown form-login">
-  <div id="formContent">
-    <div class="fadeIn first">
-      <img src="../../../assets/login-icon.png" id="icon" alt="User Icon" />
-    </div>
-    <form
-      #loginForm="ngForm"
-      (ngSubmit)="onSubmit(loginForm.value)"
-      class="loginForm"
-    >
-      <input
-        type="text"
-        id="login"
-        ngModel
-        class="fadeIn second"
-        name="email"
-        placeholder="Enter Email ID"
-        [email]="true"
-        ng-required
-      />
-      <input
-        *ngIf="notFp"
-        type="password"
-        id="login"
-        class="fadeIn third"
-        name="password"
-        ngModel
-        placeholder="Enter Password"
-        ng-required
-      />
-      <input *ngIf="notFp" type="submit" class="fadeIn fourth" value="Log In" />
-      <div *ngIf="!notFp">
-        <br />
-        <input type="submit" class="btn btn-info" value="Reset Password" />
-        <br /><br />
-      </div>
-    </form>
-    <div id="formFooter" *ngIf="notFp">
-      <a class="underlineHover" [routerLink]="['/signup']"
-        >click here to <b class="signup">Signup</b></a
+    <div id="formContent">
+        <div class="fadeIn first">
+            <img src="../../../assets/login-icon.png" id="icon" alt="User Icon" />
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="loginForm">
+            <input [class.is-invalid]="loginForm.get('email').invalid && loginForm.get('email').touched" type="text" id="login" formControlName="email" class="fadeIn second form-control" name="email" placeholder="Enter Email ID" [email]="true" ng-required />
+            <div *ngIf="(emailControl.invalid && emailControl.touched) || emailControl.dirty">
+                <small *ngIf="emailControl.errors?.required" class="text-danger">Primary email is required</small>
+                <!--question mark(?) is a safe navigation operator-->
+                <small *ngIf="emailControl.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+            </div>
+            <input [class.is-invalid]="loginForm.get('password').invalid && loginForm.get('password').touched" *ngIf="notFp" type="password" id="login" formControlName="password" class="fadeIn third form-control" name="password" ngModel placeholder="Enter Password"
+                ng-required />
+            <div *ngIf="(passwordControl.invalid && passwordControl.touched) || passwordControl.dirty">
+                <small *ngIf="passwordControl.errors?.required" class="text-danger">Password required</small>
+                <!--question mark(?) is a safe navigation operator-->
+                <small *ngIf="passwordControl.errors?.pattern" class="text-danger">Password length should be atleast 8 and should have a number in it.</small>
+            </div>
+            <input *ngIf="notFp" [disabled]="!loginForm.valid" type="submit" class="fadeIn fourth" value="Log In" />
+            <div *ngIf="!notFp">
+                <br />
+                <input type="submit" class="btn btn-info" value="Reset Password" />
+                <br /><br />
+            </div>
+        </form>
+        <div id="formFooter" *ngIf="notFp">
+            <a class="underlineHover" [routerLink]="['/signup']">click here to <b class="signup">Signup</b></a
       >
     </div>
 
@@ -49,8 +37,8 @@
     </div>
     <div id="formFooter" *ngIf="!notFp">
       <a class="underlineHover" (click)="revertFpOnClick()">Login</a>
+        </div>
     </div>
-  </div>
 </div>
 <ngx-spinner></ngx-spinner>
 <router-outlet></router-outlet>

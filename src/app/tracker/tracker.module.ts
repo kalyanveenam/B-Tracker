@@ -12,13 +12,15 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { NgxPaginationModule} from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     DashboardComponent,
     AdminDashboardComponent,
     CreateTrackerComponent,
-    ViewTrackerComponent,
+    ViewTrackerComponent
   ],
-  imports: [Ng2OrderModule,CommonModule, SharedModule, AppRoutingModule, FormsModule,NgxSpinnerModule,Ng2SearchPipeModule,NgxPaginationModule],
+  imports: [Ng2OrderModule, CommonModule,ReactiveFormsModule, SharedModule, AppRoutingModule, FormsModule,NgxSpinnerModule,Ng2SearchPipeModule,NgxPaginationModule],
 })
 export class TrackerModule {}

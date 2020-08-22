@@ -12,9 +12,10 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class HttpServiceService {
-  public baseUrl = 'https://btracker-backend.herokuapp.com/api/v1';
+  public prod = 'https://btracker-backend.herokuapp.com/api/v1';
+  public dev = 'http://localhost:3003/api/v1';
+  public baseUrl = this.prod;
   fileToUpload: File = null;
-
   constructor(public _http: HttpClient, public toastr: ToastrService) {}
 
   public signin(username, password) {

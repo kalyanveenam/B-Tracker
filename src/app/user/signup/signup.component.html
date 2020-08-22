@@ -1,52 +1,37 @@
 <div class="wrapper fadeInDown signp-form">
-  <div id="formContent">
-    <div class="fadeIn first">
-      <img src="../../../assets/signup.png" id="icon" alt="User Icon" />
-    </div>
+    <div id="formContent">
+        <div class="fadeIn first">
+            <img src="../../../assets/signup.png" id="icon" alt="User Icon" />
+        </div>
 
-    <form #signupvalues="ngForm" (ngSubmit)="onSubmit(signupvalues.value)" >
-      <input
-        type="text"
-        id="login"
-        class="fadeIn second"
-        name="email"
-        placeholder=" Email Address"
-        ngModel
-        ng-required
-      />
-      <input
-        type="text"
-        id="password"
-        class="fadeIn third"
-        name="name"
-        placeholder=" Full name"
-        ngModel
-        ng-required
-      />
-      <input
-        type="text"
-        id="password"
-        class="fadeIn third"
-        name="phoneno"
-        placeholder="Mobile number"
-        ngModel
-        ng-required
-      />
-      <input
-        type="password"
-        id="password"
-        class="fadeIn third"
-        name="password"
-        placeholder="Create password"
-        ngModel
-        ng-required
-      />
+        <form [formGroup]="userEmails" (ngSubmit)="onSubmit()">
+            <input type="text" id="login" formControlName="email" [class.is-invalid]="userEmails.get('email').invalid && userEmails.get('email').touched" class="fadeIn second form-control" name="email" placeholder=" Email Address" ng-required />
 
-      <input type="submit" class="fadeIn fourth" value="Signup" />
-    </form>
-    <div id="formFooter">
-      <a class="underlineHover" [routerLink]="['/signin']"
-        >Already have an account?   <b class="signup"> Login</b></a
+            <div *ngIf="(primEmail.invalid && primEmail.touched) || primEmail.dirty">
+                <small *ngIf="primEmail.errors?.required" class="text-danger">Primary email is required</small>
+                <!--question mark(?) is a safe navigation operator-->
+                <small *ngIf="primEmail.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+            </div>
+            <input type="text" [class.is-invalid]="userEmails.get('name').invalid && userEmails.get('name').touched" id="password" formControlName="name" class="fadeIn third form-control" name="name" placeholder=" Full name" ng-required />
+            <div *ngIf="(textControl.invalid && textControl.touched) || textControl.dirty">
+                <small *ngIf="textControl.errors?.required" class="text-danger">First Name is required</small>
+            </div>
+            <input [class.is-invalid]="userEmails.get('phoneno').invalid && userEmails.get('phoneno').touched" type="text" id="password" formControlName="phoneno" class="fadeIn third form-control" name="phoneno" placeholder="Mobile number" ng-required />
+            <div *ngIf="(phoneNumberControl.invalid && phoneNumberControl.touched) || phoneNumberControl.dirty">
+                <small *ngIf="phoneNumberControl.errors?.required" class="text-danger">Phone Number is required</small>
+                <!--question mark(?) is a safe navigation operator-->
+                <small *ngIf="phoneNumberControl.errors?.pattern" class="text-danger">Please provide a valid phone number with country code. Ex- +917777777777</small>
+            </div>
+            <input type="password" [class.is-invalid]="userEmails.get('password').invalid && userEmails.get('password').touched" id="password" formControlName="password" class="fadeIn third form-control" name="password" placeholder="Create password" ng-required />
+            <div *ngIf="(passwordValidator.invalid && passwordValidator.touched) || passwordValidator.dirty">
+                <small *ngIf="passwordValidator.errors?.required" class="text-danger">Password is required</small>
+                <!--question mark(?) is a safe navigation operator-->
+                <small *ngIf="passwordValidator.errors?.pattern" class="text-danger">Password length should be atleast 8 and should have a number in it. </small>
+            </div>
+            <input [disabled]="!userEmails.valid" type="submit" class="fadeIn fourth" value="Signup" />
+        </form>
+        <div id="formFooter">
+            <a class="underlineHover" [routerLink]="['/signin']">Already have an account?   <b class="signup"> Login</b></a
       >
     </div>
   </div>

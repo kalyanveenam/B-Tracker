@@ -1,151 +1,87 @@
 <app-navbar></app-navbar>
 <form #getFormData="ngForm" (ngSubmit)="updateBug(getFormData.value)">
-  <div
-    class="btn-group mt-2 mb-0 btngroup divchild btn-view"
-    role="group"
-    aria-label="Basic example"
-  >
-    <div class="mr">
-      <button
-        type="button"
-        class="btn btn-secondary btn-color pl-3"
-        style="color: black;"
-        (click)="changeStatus()"
-      >
+    <div class="btn-group mt-2 mb-0 btngroup divchild btn-view" role="group" aria-label="Basic example">
+        <div class="mr">
+            <button type="button" class="btn btn-secondary btn-color pl-3" style="color: black;" (click)="changeStatus()">
         Edit
       </button>
-      <button
-        type="submit"
-        class="btn btn-secondary btn-color pl-3"
-        style="color: black;"
-      >
+            <button type="submit" class="btn btn-secondary btn-color pl-3" style="color: black;">
         Save and close
       </button>
-     
-      <button
-      type="button"
-      [routerLink]="['/dashboard']"
-      class="btn btn-secondary btn-color pl-3"
-      style="color: black;"
-    >
+
+            <button type="button" [routerLink]="['/dashboard']" class="btn btn-secondary btn-color pl-3" style="color: black;">
       Cancel
     </button>
-    <div class="dropdown watch-issue">
-      <button class="btn btn-primary dropdown-toggle watch-issue" type="button" data-toggle="dropdown">Watchers
+            <div class="dropdown watch-issue">
+                <button class="btn btn-primary dropdown-toggle watch-issue" type="button" data-toggle="dropdown">Watchers
       <span class="caret"></span></button>
-      <ul class="dropdown-menu" *ngFor="let watchers of watchedIssues">
-        <li>{{watchers.username}}</li>
-    
-       
-      </ul>
-      <button type="button" class="btn btn-primary" *ngIf="isWatched" [disabled]="isWatched" (click)="watchIssue()" >Watching</button>
-      <button type="button" class="btn btn-primary" *ngIf="!isWatched"  (click)="watchIssue()" >watch</button>
-      
+                <ul class="dropdown-menu">
+                    <li *ngFor="let watchers of watchedIssues">{{watchers.username}}</li>
+                </ul>
+                <button type="button" class="btn btn-primary" *ngIf="isWatched" [disabled]="isWatched" (click)="watchIssue()">Watching</button>
+                <button type="button" class="btn btn-primary" *ngIf="!isWatched" (click)="watchIssue()">watch</button>
+
+            </div>
+        </div>
     </div>
-    </div>
-  </div>
-  <div id="accordion">
-    <div class="card">
-      <div class="card-header coll" id="headingOne">
-        <h5 class="mb-0">
-          <button type="button"
-            class="btn general-sec dropdown-toggle"
-            data-toggle="collapse"
-            data-target="#collapseOne"
-           
-            aria-controls="collapseOne"
-          >
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header coll" id="headingOne">
+                <h5 class="mb-0">
+                    <button type="button" class="btn general-sec dropdown-toggle" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
             General
           </button>
-        </h5>
-      </div>
-      <div
-        id="collapseOne"
-        class="collapse show"
-        aria-labelledby="headingOne"
-        data-parent="#accordion"
-      >
-        <div class="create-bug">
-          <div class="form-group title-input">
-            <label class="title" for="Title">Title</label>
-            <input
-              type="email"
-              class="form-control"
-              id="Title"
-              aria-describedby="emailHelp"
-              placeholder="Overview of bug"
-              name="title"
-              [(ngModel)]="this.bugData.title"
-              [disabled]="buttonDisabled"
-            />
-
-            <div class="form-group">
-              <label for="comment">Description:</label>
-
-              <textarea
-                class="form-control"
-                rows="5"
-                id="comment"
-                placeholder="Add bug description here"
-                [disabled]="buttonDisabled"
-                name="description"
-                [(ngModel)]="this.bugData.description"
-              ></textarea>
+                </h5>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="create-bug">
+                    <div class="form-group title-input">
+                        <label class="title" for="Title">Title</label>
+                        <input type="email" class="form-control" id="Title" aria-describedby="emailHelp" placeholder="Overview of bug" name="title" [(ngModel)]="this.bugData.title" [disabled]="buttonDisabled" />
 
-  <div class="card">
-    <div class="card-header coll" id="headingTwo">
-      <h5 class="mb-0">
-        <button type="button"
-          class="btn general-sec dropdown-toggle"
-          data-toggle="collapse"
-          data-target="#collapseTwo"
-        
-          aria-controls="collapseTwo"
-        >
-          Advanced
-        </button>
-      </h5>
-    </div>
-    <div
-      id="collapseTwo"
-      class="collapse show"
-      aria-labelledby="headingTwo"
-      data-parent="#accordion"
-    >
-  
-      <div class="create-bug">
-        <div class="advanced-input">
-          <div class="attachment">
-            <div class="form-group">
-              <br />
-              <label for="comment">Upload Attachment:</label>
-              
-                <div class="input-group">
-                    <div class="custom-file" id="form_div">
-                        <input ngModel type="file" class="custom-file-input" id="folder" aria-describedby="inputGroupFileAddon01" name="attachment" (change)="addFile($event)" required>
-                        <label id="labelForFolder" class="custom-file-label" for="inputGroupFile01">Upload attachment</label>
+                        <div class="form-group">
+                            <label for="comment">Description:</label>
+
+                            <textarea class="form-control" rows="5" id="comment" placeholder="Add bug description here" [disabled]="buttonDisabled" name="description" [(ngModel)]="this.bugData.description"></textarea>
+                        </div>
                     </div>
                 </div>
-    
-                    <a *ngFor="let file of attachmentFiles" href="{{file.path}}">{{file.name}} <br/></a> <br />
-         
             </div>
-               <a *ngFor="let file of attachments" href="{{file.path}}">{{file.name}}<br/></a> <br />
-            <label for="comment">Priority:</label>
-            
+        </div>
+    </div>
 
-            <select
-              class="browser-default custom-select priority-mob"
-              [disabled]="buttonDisabled"
-              name="priority"
-              [(ngModel)]="this.bugData.priority"
-            >
+    <div class="card">
+        <div class="card-header coll" id="headingTwo">
+            <h5 class="mb-0">
+                <button type="button" class="btn general-sec dropdown-toggle" data-toggle="collapse" data-target="#collapseTwo" aria-controls="collapseTwo">
+          Advanced
+        </button>
+            </h5>
+        </div>
+        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+
+            <div class="create-bug">
+                <div class="advanced-input">
+                    <div class="attachment">
+                        <div class="form-group">
+                            <br />
+                            <label for="comment">Upload Attachment:</label>
+
+                            <div class="input-group">
+                                <div class="custom-file" id="form_div">
+                                    <input ngModel type="file" class="custom-file-input" id="folder" aria-describedby="inputGroupFileAddon01" name="attachment" (change)="addFile($event)" required>
+                                    <label id="labelForFolder" class="custom-file-label" for="inputGroupFile01">Upload attachment</label>
+                                </div>
+                            </div>
+
+                            <a *ngFor="let file of attachmentFiles" href="{{file.path}}">{{file.name}} <br/></a> <br />
+
+                        </div>
+                        <a *ngFor="let file of attachments" href="{{file.path}}">{{file.name}}<br/></a> <br />
+                        <label for="comment">Priority:</label>
+
+
+                        <select class="browser-default custom-select priority-mob" [disabled]="buttonDisabled" name="priority" [(ngModel)]="this.bugData.priority">
               <option
                 *ngFor="let priority of priorities"
                 [value]="priority.id"
@@ -153,90 +89,66 @@
               >
             </select>
 
-            <label for="comment">Status</label>
+                        <label for="comment">Status</label>
 
-            <select
-              class="browser-default custom-select priority-mob"
-              [disabled]="buttonDisabled"
-              name="status"
-              [(ngModel)]="this.bugData.status"
-            >
+                        <select class="browser-default custom-select priority-mob" [disabled]="buttonDisabled" name="status" [(ngModel)]="this.bugData.status">
               <option *ngFor="let status of statusList" [value]="status.name">{{
                 status.name
               }}</option>
             </select>
-            <label for="comment">Assignee</label>
-            <select
-              class="browser-default custom-select priority-mob"
-              [disabled]="buttonDisabled"
-              name="assignee"
-              [(ngModel)]="this.bugData.assignee"
-            >
+                        <label for="comment">Assignee</label>
+                        <select class="browser-default custom-select priority-mob" [disabled]="buttonDisabled" name="assignee" [(ngModel)]="this.bugData.assignee">
               <option
                 *ngFor="let assignee of assignees"
                 [value]="assignee.name"
                 >{{ assignee.name }}</option
               >
             </select>
-          </div>
+                    </div>
 
-          <br />
+                    <br />
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </form>
 
 <div id="accordion">
-  <div class="card">
-    <div class="card-header coll" id="headingOne">
-      <h5 class="mb-0">
-        <button type="button"
-        class="btn general-sec dropdown-toggle"
-          data-toggle="collapse"
-          data-target="#collapseTwo"
-         
-          aria-controls="collapseTwo"
-        >
+    <div class="card">
+        <div class="card-header coll" id="headingOne">
+            <h5 class="mb-0">
+                <button type="button" class="btn general-sec dropdown-toggle" data-toggle="collapse" data-target="#collapseTwo" aria-controls="collapseTwo">
           Comments:
         </button>
-       
-      </h5>
+
+            </h5>
+
+        </div>
+
+        <button class="btn view-com" type="button" (click)="getComments()"><u>View all comments</u></button>
+        <div class="comment-cards">
+            <div class="card comment">
+                <div class="card-body card-space mb-2" *ngFor="let commentbyid of allComments">
+                    <span class="user-name"> {{ commentbyid.username }} :</span
+          ><span class="user-comment"> {{ commentbyid.comment }}</span>
+                </div>
+            </div>
+        </div>
+        <form #getcom="ngForm" (ngSubmit)="createComment(getcom.value)">
+
+            <div class="input-group comment-input">
+                <input type="text" class="form-control" placeholder="Type your comment here" aria-label="Recipient's username" aria-describedby="basic-addon2" name="comment" ngModel />
+                <div class="input-group-append">
+                    <button class="btn combtn" type="submit">POST</button>
+
+                </div>
+
+            </div>
+
+        </form>
 
     </div>
- 
-    <button class="btn view-com" type="button" (click)="getComments()"><u>View all comments</u></button>
-    <div class="comment-cards">
-      <div class="card comment">
-        <div class="card-body card-space mb-2" *ngFor="let commentbyid of allComments">
-          <span class="user-name"> {{ commentbyid.username }} :</span
-          ><span class="user-comment"> {{ commentbyid.comment }}</span>
-        </div>
-      </div>
-    </div>
-    <form #getcom="ngForm" (ngSubmit)="createComment(getcom.value)">
-    
-      <div class="input-group comment-input">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Type your comment here"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-          name="comment"
-          ngModel
-        />
-        <div class="input-group-append">
-          <button class="btn combtn" type="submit">POST</button>
-    
-        </div>
-     
-      </div>
-      
-    </form>
-    
-  </div>
-  
+
 </div>
 
 <ngx-spinner></ngx-spinner>

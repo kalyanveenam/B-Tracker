@@ -2,6 +2,7 @@ import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { HttpServiceService } from '../../http-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-create-tracker',
   templateUrl: './create-tracker.component.html',
@@ -19,19 +20,22 @@ export class CreateTrackerComponent implements OnInit {
   constructor(
     public Http: HttpServiceService,
     public toastr: ToastrService,
-    public router: Router
+    public router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
   }
   public addFile(event) {
+    this.spinner.show();
     var attachment = {};
     this.fileToUpload = event.target.files.item(0);
     attachment['name'] = event.target.files[0].name;
     this.Http.postFile(this.fileToUpload).subscribe((res) => {
       attachment['path'] = 'https://dashboard.heroku.com/apps/btracker-backend' + attachment['name'];
       this.attachmentFiles.push(attachment);
+      this.spinner.hide();
     }),
       (err) => {};
   }
@@ -61,11 +65,12 @@ export class CreateTrackerComponent implements OnInit {
           response['data']['_id'],
           data.attachment
         ).subscribe((response) => {
-          this.Http.sendEmail(
-            localStorage.getItem('email'),
-            'You have created a tracker',
-            'Check it out!'
-          );
+         this.Http.sendEmail(
+              response['data']['email'],
+              'You have created a tracker',
+              'Please open Btracker tool for more details'
+            ).subscribe((res)=>{
+            })
         });
       },
       (error) => {

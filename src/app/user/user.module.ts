@@ -8,9 +8,11 @@ import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [HomeComponent, SigninComponent, SignupComponent],
-  imports: [CommonModule, SharedModule, AppRoutingModule, FormsModule,NgxSpinnerModule],
+  imports: [CommonModule,ReactiveFormsModule,SharedModule, AppRoutingModule, FormsModule,NgxSpinnerModule],
  
 })
 export class UserModule {}

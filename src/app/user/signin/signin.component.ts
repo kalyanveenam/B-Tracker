@@ -3,6 +3,8 @@ import { HttpServiceService } from '../../http-service.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -16,6 +18,21 @@ export class SigninComponent implements OnInit {
     public toastr: ToastrService,
     private spinner: NgxSpinnerService
   ) { }
+  get emailControl() {
+    return this.loginForm.get('email')
+  }
+  get passwordControl() {
+    return this.loginForm.get('password')
+  }
+  loginForm = new FormGroup({
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^(?=.*\\d).{8,}$')
+    ])
+  });
   public email;
   forgotPasswordOnClick = () => {
     this.notFp = false;
@@ -23,7 +40,8 @@ export class SigninComponent implements OnInit {
   revertFpOnClick = () => {
     this.notFp = true;
   };
-  onSubmit = (value) => {
+  onSubmit = () => {
+    var value = this.loginForm.value;
     this.spinner.show();
     if (this.notFp) {
       this.HttpService.signin(value.email, value.password).subscribe(

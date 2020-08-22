@@ -1,138 +1,85 @@
 <app-navbar></app-navbar>
 <form #formDetails="ngForm" (ngSubmit)="onSubmit(formDetails.value)">
-  <div
-    class="btn-group mt-2 mb-0 btngroup divchild btn-view"
-    role="group"
-    aria-label="Basic example"
-  >
-    <div class="mr"></div>
-  </div>
-  <div id="accordion">
-    <div class="card">
-      <div class="card-header coll" id="headingOne">
-        <h5 class="mb-0">
-          <button
-            type="button"
-            class="btn general-sec dropdown-toggle"
-            data-toggle="collapse"
-            data-target="#collapseOne"
-            aria-controls="collapseOne"
-          >
+    <div class="btn-group mt-2 mb-0 btngroup divchild btn-view" role="group" aria-label="Basic example">
+        <div class="mr"></div>
+    </div>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header coll" id="headingOne">
+                <h5 class="mb-0">
+                    <button type="button" class="btn general-sec dropdown-toggle" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
             General
           </button>
-        </h5>
-      </div>
-      <div
-        id="collapseOne"
-        class="collapse show"
-        aria-labelledby="headingOne"
-        data-parent="#accordion"
-      >
-        <div class="create-bug">
-          <div class="form-group title-input">
-            <label class="title" for="Title">Title</label>
-            <input
-              type="email"
-              class="form-control"
-              id="Title"
-              aria-describedby="emailHelp"
-              placeholder="Overview of bug"
-              name="title"
-              ngModel
-            />
-
-            <div class="form-group">
-              <label for="comment">Description:</label>
-
-              <textarea
-                class="form-control"
-                rows="5"
-                id="comment"
-                placeholder="Add bug description here"
-                name="description"
-                ngModel
-              ></textarea>
+                </h5>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="create-bug">
+                    <div class="form-group title-input">
+                        <label class="title" for="Title">Title</label>
+                        <input type="email" class="form-control" id="Title" aria-describedby="emailHelp" placeholder="Overview of bug" name="title" ngModel />
 
-  <div class="card">
-    <div class="card-header coll" id="headingTwo">
-      <h5 class="mb-0">
-        <button
-          type="button"
-          class="btn general-sec dropdown-toggle"
-          data-toggle="collapse"
-          data-target="#collapseTwo"
-          aria-controls="collapseTwo"
-        >
-          Advanced
-        </button>
-      </h5>
-    </div>
-    <div
-      id="collapseTwo"
-      class="collapse show"
-      aria-labelledby="headingTwo"
-      data-parent="#accordion"
-    >
-      <div class="create-bug">
-        <div class="advanced-input">
-          <div class="attachment">
-            <div class="form-group">
-              <br />
-              <label for="comment">Upload Attachment:</label>
-              
-                <div class="input-group">
-                    <div class="custom-file" id="form_div">
-                        <input ngModel type="file" class="custom-file-input" id="folder" aria-describedby="inputGroupFileAddon01" name="attachment" (change)="addFile($event)" required>
-                        <label id="labelForFolder" class="custom-file-label" for="inputGroupFile01">Upload attachment</label>
+                        <div class="form-group">
+                            <label for="comment">Description:</label>
+
+                            <textarea class="form-control" rows="5" id="comment" placeholder="Add bug description here" name="description" ngModel></textarea>
+                        </div>
                     </div>
                 </div>
-    
-                    <a *ngFor="let file of attachmentFiles" href="{{file.path}}">{{file.name}} <br/></a> <br />
-         
             </div>
-            <label for="comment">Priority:</label>
-            <br />
+        </div>
+    </div>
 
-            <select
-              class="browser-default custom-select priority-mob"
-              name="priority"
-              ngModel
-            >
+    <div class="card">
+        <div class="card-header coll" id="headingTwo">
+            <h5 class="mb-0">
+                <button type="button" class="btn general-sec dropdown-toggle" data-toggle="collapse" data-target="#collapseTwo" aria-controls="collapseTwo">
+          Advanced
+        </button>
+            </h5>
+        </div>
+        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="create-bug">
+                <div class="advanced-input">
+                    <div class="attachment">
+                        <div class="form-group">
+                            <br />
+                            <label for="comment">Upload Attachment:</label>
+
+                            <div class="input-group">
+                                <div class="custom-file" id="form_div">
+                                    <input ngModel type="file" class="custom-file-input" id="folder" aria-describedby="inputGroupFileAddon01" name="attachment" (change)="addFile($event)" required>
+                                    <label id="labelForFolder" class="custom-file-label" for="inputGroupFile01">Upload attachment</label>
+                                </div>
+                            </div>
+
+                            <a *ngFor="let file of attachmentFiles" href="{{file.path}}">{{file.name}} <br/></a> <br />
+
+                        </div>
+                        <label for="comment">Priority:</label>
+                        <br />
+
+                        <select class="browser-default custom-select priority-mob" name="priority" ngModel>
               <option *ngFor="let priority of priorities">{{
                 priority.name
               }}</option>
             </select>
 
-            <label for="comment">Assignee</label>
-            <select
-              class="browser-default custom-select priority-mob"
-              name="assignee"
-              ngModel
-            >
+                        <label for="comment">Assignee</label>
+                        <select class="browser-default custom-select priority-mob" name="assignee" ngModel>
               <option
                 *ngFor="let assignee of assignees"
                 [value]="assignee.name"
                 >{{ assignee.name }}</option
               >
             </select>
-          </div>
+                    </div>
 
-          <br />
+                    <br />
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <button
-      type="submit"
-      class="btn btn-secondary btn-color saveclose"
-      style="color: black;"
-    >
+        <button type="submit" class="btn btn-secondary btn-color saveclose" style="color: black;">
       Save and close
     </button>
-  </div>
+    </div>
 </form>
