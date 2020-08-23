@@ -34,3 +34,15 @@ color: rgb(2, 2, 112);
   margin-top: 4vh;
   color: rgb(212, 2, 2);
 }
+.noBugs{
+  padding-top: 2vw;
+  width: 100%;
+}
+@media(min-width:0px) and (max-width:760px) {
+
+  .noBugs{
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+    width: 100%;
+  }
+}

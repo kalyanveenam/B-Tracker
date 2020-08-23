@@ -1,30 +1,39 @@
 <app-navbar></app-navbar>
+
 <form #getFormData="ngForm" (ngSubmit)="updateBug(getFormData.value)">
-    <div class="btn-group mt-2 mb-0 btngroup divchild btn-view" role="group" aria-label="Basic example">
-        <div class="mr">
-            <button type="button" class="btn btn-secondary btn-color pl-3" style="color: black;" (click)="changeStatus()">
-        Edit
-      </button>
-            <button type="submit" class="btn btn-secondary btn-color pl-3" style="color: black;">
-        Save and close
-      </button>
-
-            <button type="button" [routerLink]="['/dashboard']" class="btn btn-secondary btn-color pl-3" style="color: black;">
-      Cancel
-    </button>
-            <div class="dropdown watch-issue">
-                <button class="btn btn-primary dropdown-toggle watch-issue" type="button" data-toggle="dropdown">Watchers
-      <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li *ngFor="let watchers of watchedIssues">{{watchers.username}}</li>
-                </ul>
-                <button type="button" class="btn btn-primary" *ngIf="isWatched" [disabled]="isWatched" (click)="watchIssue()">Watching</button>
-                <button type="button" class="btn btn-primary" *ngIf="!isWatched" (click)="watchIssue()">watch</button>
-
-            </div>
-        </div>
+  
+  
+  
+  <div class="btn-group mt-2 mb-0 btngroup divchild btn-view" role="group" aria-label="Basic example">
+     
     </div>
     <div id="accordion">
+
+      <div class="mr">
+      <div class="dropdown watch-issue">
+        <button class="btn dropdown-toggle watch-issue" type="button" data-toggle="dropdown">Watchers
+    <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li *ngFor="let watchers of watchedIssues">{{watchers.username}}</li>
+        </ul>
+        <button type="button" class="btn btn-primary" *ngIf="isWatched" [disabled]="isWatched" (click)="watchIssue()">Watching</button>
+        <button type="button" class="btn btn-primary" *ngIf="!isWatched" (click)="watchIssue()">watch</button>
+    
+    </div>  
+  </div>
+  <div class="mr2">
+    <button type="button" class="btn btn-secondary btn-color pl-3" style="color: black;" (click)="changeStatus()">
+  Edit
+  </button>
+    <button type="submit" class="btn btn-secondary btn-color pl-3" style="color: black;">
+  Save and close
+  </button>
+  
+    <button type="button" [routerLink]="['/dashboard']" class="btn btn-secondary btn-color pl-3" style="color: black;">
+  Cancel
+  </button>
+  
+  </div>
         <div class="card">
             <div class="card-header coll" id="headingOne">
                 <h5 class="mb-0">
@@ -48,7 +57,8 @@
                 </div>
             </div>
         </div>
-    </div>
+
+      </div>
 
     <div class="card">
         <div class="card-header coll" id="headingTwo">

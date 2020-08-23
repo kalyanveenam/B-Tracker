@@ -41,25 +41,29 @@ export class DashboardComponent implements OnInit {
   isWatchedClicked: boolean = false;
   isCreateClicked: boolean = false;
   isWatchedIssues: boolean = false;
+  isNodata: boolean = false;
   ngOnInit(): void {
-   this.bugdReportedByUser()
+    this.bugdReportedByUser();
     this.btnstyle = 'btn-default';
   }
   changestyle() {
     this.btnstyle = 'btn-change';
-
   }
   public getBugs() {
+    this.isNodata = false;
     this.spinner.show();
     this.Http.getTrackers().subscribe((response) => {
-    
       this.trackers = response['data'];
-  
+      console.log(this.trackers.length)
+      if (this.trackers.length == 0) {
+        this.isNodata = true;
+      }
+      console.log(this.isNodata)
       this.spinner.hide();
     });
   }
   sendId(data) {
-    console.log(data)
+    console.log(data);
     localStorage.setItem('currentId', data);
     this.router.navigate(['viewTracker', data]);
   }
@@ -72,26 +76,28 @@ export class DashboardComponent implements OnInit {
     this.isReportedClicked = false;
     this.isWatchedIssues = false;
     this.spinner.show();
-
+    this.isNodata = false;
     this.Http.getTrackersByAssignee(localStorage.getItem('username')).subscribe(
       (response) => {
         this.spinner.hide();
-        console.log(response['data'])
+
+        console.log(response['data']);
         this.trackers = response['data'];
+        if (this.trackers.length == 0) {
+          this.isNodata = true;
+        }
+        console.log(this.isNodata)
       }
     );
   }
   getAttaachmentsById() {
-  
     this.Http.getAttachmentsByBugId(
       localStorage.getItem('currentId')
     ).subscribe((response) => {
-    
       // this.trackers = response['data'];
     });
   }
   bugdReportedByUser() {
-   
     this.isAssignee = true;
     this.isReporter = false;
     this.isReportedClicked = true;
@@ -99,6 +105,7 @@ export class DashboardComponent implements OnInit {
     this.isCreateClicked = false;
     this.isWatchedClicked = false;
     this.isWatchedIssues = false;
+    this.isNodata = false;
     this.getBugs();
   }
   public bugsByUserId() {
@@ -107,17 +114,19 @@ export class DashboardComponent implements OnInit {
     this.isAssigneeClicked = false;
     this.isCreateClicked = false;
     this.isWatchedIssues = true;
-    
+    this.isNodata = false;
     this.Http.getWatchedBugsByUserId(localStorage.getItem('userId')).subscribe(
       (response) => {
         this.isAssignee = true;
-      console.log(response)
+        console.log(response);
         this.trackers = response['data'];
-       
+        if (this.trackers.length == 0) {
+          this.isNodata = true;
+        }
       }
     );
   }
-  public removeFromWatchList(data) { 
-    console.log('delete'+data)
+  public removeFromWatchList(data) {
+    console.log('delete' + data);
   }
 }

@@ -55,6 +55,7 @@ export class ViewTrackerComponent implements OnInit {
     this.getAllUsers();
     this.getAttachments();
     this.watchedUsersByBugId();
+    this.getComments();
   }
   public getAllUsers() {
     this.Http.getAllUsers().subscribe((response) => {

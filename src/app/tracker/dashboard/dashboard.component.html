@@ -82,6 +82,7 @@
     </thead>
 
     <tbody>
+     
       <tr
         *ngFor="
           let bug of trackers
@@ -109,6 +110,7 @@
       </tr>
     </tbody>
   </table>
+  <div  class="noBugs"    *ngIf=isNodata>No Bugs Available for you at this moment! Click on create tracker to create one</div>
 </div>
 <pagination-controls (pageChange)="p = $event"></pagination-controls>
 <app-footer></app-footer>
