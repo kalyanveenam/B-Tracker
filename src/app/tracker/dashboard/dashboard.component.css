@@ -45,4 +45,7 @@ color: rgb(2, 2, 112);
     padding-bottom: 2vw;
     width: 100%;
   }
+  .search-term{
+    margin-top: 10vh;
+  }
 }
