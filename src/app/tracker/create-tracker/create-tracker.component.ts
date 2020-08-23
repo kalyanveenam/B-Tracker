@@ -53,29 +53,39 @@ export class CreateTrackerComponent implements OnInit {
       data.assignee
     ).subscribe(
       (response) => {
-        if (response) {
+        if (response['error'] == false) {
+
+        
           this.toastr.success(
             'Bug is created sucessfully',
             'Navigting to your dashboard'
           );
           this.router.navigate(['dashboard']);
         }
+        else { 
+          this.toastr.error(
+            'Please enter all mandatory fields'
+          );
+        }
 
         this.Http.storeAttachment(
           response['data']['_id'],
           data.attachment
         ).subscribe((response) => {
+       
          this.Http.sendEmail(
               response['data']['email'],
               'You have created a tracker',
               'Please open Btracker tool for more details'
             ).subscribe((res)=>{
             })
-        });
+        },
+        (error) => {
+          this.toastr.error('Unable to create a bug');
+        }
+        );
       },
-      (error) => {
-        this.toastr.error('Unable to create a bug');
-      }
+     
     );
   }
 }

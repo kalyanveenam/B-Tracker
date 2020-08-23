@@ -1,7 +1,14 @@
 <app-navbar></app-navbar>
 <form #formDetails="ngForm" (ngSubmit)="onSubmit(formDetails.value)">
+
+
     <div class="btn-group mt-2 mb-0 btngroup divchild btn-view" role="group" aria-label="Basic example">
-        <div class="mr"></div>
+       
+        <div class="mr2">
+           
+
+        </div>
+   
     </div>
     <div id="accordion">
         <div class="card">
@@ -15,11 +22,11 @@
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="create-bug">
                     <div class="form-group title-input">
-                        <label class="title" for="Title">Title</label>
+                        <label class="title" for="Title">Title *</label>
                         <input type="email" class="form-control" id="Title" aria-describedby="emailHelp" placeholder="Overview of bug" name="title" ngModel />
 
                         <div class="form-group">
-                            <label for="comment">Description:</label>
+                            <label for="comment">Description *</label>
 
                             <textarea class="form-control" rows="5" id="comment" placeholder="Add bug description here" name="description" ngModel></textarea>
                         </div>
@@ -55,7 +62,7 @@
                             <a *ngFor="let file of attachmentFiles" href="{{file.path}}">{{file.name}} <br/></a> <br />
 
                         </div>
-                        <label for="comment">Priority:</label>
+                        <label for="comment">Priority *</label>
                         <br />
 
                         <select class="browser-default custom-select priority-mob" name="priority" ngModel>
@@ -64,7 +71,7 @@
               }}</option>
             </select>
 
-                        <label for="comment">Assignee</label>
+                        <label for="comment">Assignee *</label>
                         <select class="browser-default custom-select priority-mob" name="assignee" ngModel>
               <option
                 *ngFor="let assignee of assignees"
@@ -79,7 +86,10 @@
             </div>
         </div>
         <button type="submit" class="btn btn-secondary btn-color saveclose" style="color: black;">
-      Save and close
+      Create bug
     </button>
-    </div>
+    <button type="button" [routerLink]="['/dashboard']" class="btn btn-secondary btn-color saveclose" style="color: black;">
+        Cancel
+      </button>
+        </div>
 </form>

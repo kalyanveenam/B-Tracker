@@ -51,6 +51,7 @@
   color: #343a40;
 }
 .btn-color {
+  margin-right: 5vw;
   background-color:#343a40 !important;
   color: aliceblue !important;
 }
